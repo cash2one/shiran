@@ -1,0 +1,9 @@
+package shiran;
+option go_package = "shiran";
+
+message ShiranMessage
+{
+	required string service = 1;
+	required string method = 2;
+	optional bytes msg = 3;
+}
