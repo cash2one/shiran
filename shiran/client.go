@@ -3,43 +3,30 @@ package shiran
 import (
 	"github.com/golang/glog"
 	"net"
-	"runtime"
-	"time"
 	"reflect"
 	"errors"
 	"strings"
 	"crypto/tls"
-	"container/list"
 )
 
 type Client struct {
-	ipport			string
-	num				int64
-	sessions		map[string]*Session
-	register		chan *Session
-	unregister		chan *Session
-	services		map[string]*Service
-	connectedCallbacks  *list.List
-	aesKey			[]byte
-	quit			chan bool
+	ipport				string
+	num					int64
+	register			chan *Session
+	unregister			chan *Session
+	services			map[string]*Service
+	aesKey				[]byte
 }
 
-func NewClient(ipport string, num int64, aesKey []byte) *Client {
+func NewClient(ipport string, num int64, register, unregister chan *Session, aesKey []byte) *Client {
 	return &Client{
-		ipport:		ipport,
-		num:		num,
-		sessions:   make(map[string]*Session),
-		register:   make(chan *Session),
-		unregister: make(chan *Session),
-		services:   make(map[string]*Service),
-		connectedCallbacks: list.New(),
-		aesKey:		aesKey,
-		quit:		make(chan bool),
+		ipport:				ipport,
+		num:				num,
+		register:			register,
+		unregister:			unregister,
+		services:			make(map[string]*Service),
+		aesKey:				aesKey,
 	}
-}
-
-func (client *Client) AddConnectedCallback(ccb ConnectedCallback) {
-	client.connectedCallbacks.PushBack(ccb)
 }
 
 func (client *Client) serviceGet(name string) *Service {
@@ -69,30 +56,6 @@ func (client *Client) RegisterService(rcvr interface{}) error {
 	return nil
 }
 
-func (client *Client) handleSessions() {
-	ticks := time.Tick(time.Second * 1)
-	var quit bool
-	for {
-		select {
-		case session := <-client.register:
-			client.sessions[session.Name] = session
-		case session := <-client.unregister:
-			delete(client.sessions, session.Name)
-			close(session.packetQueue)
-		case _ = <-ticks:
-			glog.Infof("%d %d", len(client.sessions), runtime.NumGoroutine())
-			if quit == true && len(client.sessions) == 0 {
-				return
-			}
-		case _ = <-client.quit:
-			for _, session := range client.sessions {
-				session.close()
-			}
-			quit = true
-		}
-	}
-}
-
 func (client *Client) ConnectServer() {
 	if client.num > 1 {
 		for i := int64(1); i <= client.num; i++ {
@@ -117,8 +80,6 @@ func (client *Client) ConnectServer() {
 			go client.serveConn(conn, int64(i+1))
 		}
 	}
-
-	client.handleSessions()
 }
 
 func (client *Client) TlsConnectServer(tlsConfig *tls.Config) {
@@ -155,17 +116,6 @@ func (client *Client) TlsConnectServer(tlsConfig *tls.Config) {
 			go client.serveConn(conn, int64(i+1))
 		}
 	}
-
-	client.handleSessions()
-}
-
-func (client *Client) connected(session *Session) {
-	for e := client.connectedCallbacks.Front(); e != nil; e = e.Next() {
-		cb, ok := e.Value.(ConnectedCallback)
-		if ok {
-			cb(session)
-		}
-	}
 }
 
 func (client *Client) serveConn(conn net.Conn, id int64) {
@@ -174,10 +124,5 @@ func (client *Client) serveConn(conn net.Conn, id int64) {
 	defer func() { client.unregister <- session }()
 
 	go session.sendPacketQueue()
-	client.connected(session)
 	session.recvMessage()
-}
-
-func (client *Client) Quit() {
-	client.quit <- true
 }

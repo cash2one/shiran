@@ -7,8 +7,6 @@ import (
 	"crypto/tls"
 	"errors"
 	"time"
-	"runtime"
-	"container/list"
 )
 
 var typeOfSession = reflect.TypeOf((*Session)(nil))
@@ -26,22 +24,18 @@ type Service struct {
 }
 
 type Server struct {
-	sessions	map[string]*Session
-	register	chan *Session
-	unregister	chan *Session
-	services	map[string]*Service
-	connectedCallbacks  *list.List
-	aesKey		[]byte
+	register            chan *Session
+	unregister          chan *Session
+	services			map[string]*Service
+	aesKey				[]byte
 }
 
-func NewServer(aesKey []byte) *Server {
+func NewServer(register, unregister chan *Session, aesKey []byte) *Server {
 	return &Server{
-		sessions:		make(map[string]*Session),
-		register:		make(chan *Session),
-		unregister:		make(chan *Session),
-		services:		make(map[string]*Service),
-		connectedCallbacks: list.New(),
-		aesKey:			aesKey,
+		register:				register,
+		unregister:				unregister,
+		services:				make(map[string]*Service),
+		aesKey:					aesKey,
 	}
 }
 
@@ -107,26 +101,6 @@ func registerMethods(typ reflect.Type) map[string]*methodType {
 	return methods
 }
 
-func (server *Server) AddConnectedCallback(ccb ConnectedCallback) {
-	server.connectedCallbacks.PushBack(ccb)
-}
-
-
-func (server *Server) handleSessions() {
-	ticks := time.Tick(time.Second * 1)
-	for {
-		select {
-		case session := <-server.register:
-			server.sessions[session.Name] = session
-		case session := <-server.unregister:
-			delete(server.sessions, session.Name)
-			close(session.packetQueue)
-		case _ = <-ticks:
-			glog.Infof("%d %d", len(server.sessions), runtime.NumGoroutine())
-		}
-	}
-}
-
 func (server *Server) ListenAndServe(addr string) error {
 	l, err := net.Listen("tcp", addr)
 	if err != nil {
@@ -134,8 +108,7 @@ func (server *Server) ListenAndServe(addr string) error {
 		return err
 	}
 
-	go server.serve(l)
-	server.handleSessions()
+	server.serve(l)
 	return nil
 }
 
@@ -146,18 +119,8 @@ func (server *Server) TlsListenAndServe(addr string, tlsConfig *tls.Config) erro
 		return err
 	}
 
-	go server.serve(l)
-	server.handleSessions()
+	server.serve(l)
 	return nil
-}
-
-func (server *Server) connected(session *Session) {
-	for e := server.connectedCallbacks.Front(); e != nil; e = e.Next() {
-		cb, ok := e.Value.(ConnectedCallback)
-		if ok {
-			cb(session)
-		}
-	}
 }
 
 func (server *Server) serve(l net.Listener) error {
@@ -196,7 +159,6 @@ func (server *Server) serveConn(conn net.Conn, id int64) {
 	defer func() { server.unregister <- session }()
 
 	go session.sendPacketQueue()
-	server.connected(session)
 	session.recvMessage()
 }
 

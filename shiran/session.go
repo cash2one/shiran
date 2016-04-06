@@ -8,26 +8,24 @@ import (
 	"reflect"
 )
 
-type ConnectedCallback func(*Session)
-
 type ServiceGetter interface {
 	serviceGet(name string) *Service 
 }
 
 type Session struct {
-	Name        string
-	conn        net.Conn
-	packetQueue chan []byte
-	codec		Codec
+	Name			string
+	conn			net.Conn
+	packetQueue		chan []byte
+	codec			Codec
 	serviceGetter	ServiceGetter
-	closed		bool
+	Closed			bool
 }
 
 func NewSession(id int64, conn net.Conn, serviceGetter ServiceGetter, aesKey []byte) *Session {
 	session := &Session{
-		Name:        conn.RemoteAddr().String() + "_ID_" + strconv.FormatInt(id, 10),
-		conn:        conn,
-		packetQueue: make(chan []byte, 1024),	//size?
+		Name:			conn.RemoteAddr().String() + "_ID_" + strconv.FormatInt(id, 10),
+		conn:			conn,
+		packetQueue:	make(chan []byte, 1024),	//size?
 		serviceGetter:	serviceGetter,
 	}
 	if len(aesKey) > 0 {
@@ -39,16 +37,17 @@ func NewSession(id int64, conn net.Conn, serviceGetter ServiceGetter, aesKey []b
 	return session
 }
 
-func (session *Session) close() {
-	if session.closed == false {
+func (session *Session) Close() {
+	if session.Closed == false {
 		glog.Infof("Session.DOWN Name:%s LocalAddr:%s RemoteAddr:%s", session.Name, session.conn.LocalAddr().String(), session.conn.RemoteAddr().String())
 		session.conn.Close()
-		session.closed = true
+		session.Closed = true
 	}
 }
 
 func (session *Session) sendPacketQueue() {
-	defer session.close()
+	defer session.Close()
+	defer close(session.packetQueue)
 
 	for packet := range session.packetQueue {
 		n, err := session.conn.Write(packet)
@@ -141,4 +140,5 @@ func (session *Session) recvMessage() {
 		// Invoke the method, providing a new value for the reply.
 		function.Call([]reflect.Value{service.rcvr, argv, reflect.ValueOf(session)})
 	}
+	session.Close()
 }
