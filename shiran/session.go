@@ -69,16 +69,20 @@ func (session *Session) SendMessage(service, method string, pb proto.Message) er
 
 	msg, err := proto.Marshal(pb)
 	if err != nil {
+		glog.Errorf("SendMessage: msg Marshal session.Name:%s %v", session.Name, err)
 		return err
 	}
 	shiranMsg.Msg = msg
+
 	payload, err := proto.Marshal(shiranMsg)
 	if err != nil {
+		glog.Errorf("SendMessage: shiranMsg Marshal session.Name:%s %v", session.Name, err)
 		return err
 	}
 
 	packet, err := session.codec.Encode(payload)
 	if err != nil {
+		glog.Errorf("SendMessage: shiranMsg Encode session.Name:%s %v", session.Name, err)
 		return err
 	}
 

@@ -6,7 +6,6 @@ import (
 	"crypto/cipher"
 	"encoding/binary"
 	"errors"
-	"fmt"
 	"github.com/golang/glog"
 )
 
@@ -34,7 +33,7 @@ func (codec *SessionCodec) Decode() (payload []byte, err error) {
 
 	length := binary.BigEndian.Uint32(header)
 	if length > 64*1024*1024 {
-		fmt.Errorf("Decode: invalid length %d", length)
+		glog.Errorf("Decode: invalid length %d", length)
 		return
 	}
 
@@ -93,7 +92,7 @@ func (codec *SessionAesCodec) Decode() (payload []byte, err error) {
 	header := decFirstBlock[:4]
 	length := binary.BigEndian.Uint32(header)
 	if length > 64*1024*1024 {
-		fmt.Errorf("Decode: invalid length %d", length)
+		glog.Errorf("Decode: invalid length %d", length)
 		return
 	}
 

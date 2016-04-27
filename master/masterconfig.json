@@ -1,0 +1,21 @@
+{
+	"masteraddress": "127.0.0.1:9999",
+	"commandaddress": "127.0.0.1:9899",
+	"slave": [
+	{
+		"name": "FJSlave",
+		"app": [
+		{
+			"name": "ppserver",
+			"bin": "pingpongserver",
+			"arg": []
+		},
+		{
+			"name": "ppclient",
+			"bin": "pingpongclient",
+			"arg": []
+		}
+		]
+	}
+	]
+}

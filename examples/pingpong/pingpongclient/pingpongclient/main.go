@@ -27,9 +27,9 @@ var opt options
 func init() {
 	flag.BoolVar(&opt.tls, "tls", false, "tls conn")
 	flag.StringVar(&opt.aesKey, "aesKey", "", "AES key")
-	flag.Int64Var(&opt.num, "n", 5000, "launch client num")
+	flag.Int64Var(&opt.num, "n", 1000, "launch client num")
 	flag.IntVar(&opt.size, "s", 4096, "client send msg size")
-	flag.IntVar(&opt.timeout, "t", 20, "client quit timeout")
+	flag.IntVar(&opt.timeout, "t", 40, "client quit timeout")
 	flag.StringVar(&opt.caFile, "ca", "", "caFile")	//your/path/pki/ca.crt
 }
 
