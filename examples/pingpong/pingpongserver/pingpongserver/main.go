@@ -57,9 +57,9 @@ func (ppServer *PingpongServer) run(opt *options) {
 			panic(errors.New("key crt null"))
 		}
 		tlsConfig := shiran.GetServerTlsConfiguration(opt.certificateFile, opt.privateKeyFile, opt.caFile)
-		ppServer.server.TlsListenAndServe("localhost:8848", tlsConfig)
+		ppServer.server.TlsListenAndServe("127.0.0.1:8848", tlsConfig)
 	} else {
-		ppServer.server.ListenAndServe("localhost:8848")
+		ppServer.server.ListenAndServe("127.0.0.1:8848")
 	}
 }
 

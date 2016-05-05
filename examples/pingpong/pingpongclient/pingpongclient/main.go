@@ -29,7 +29,7 @@ func init() {
 	flag.StringVar(&opt.aesKey, "aesKey", "", "AES key")
 	flag.Int64Var(&opt.num, "n", 1000, "launch client num")
 	flag.IntVar(&opt.size, "s", 4096, "client send msg size")
-	flag.IntVar(&opt.timeout, "t", 40, "client quit timeout")
+	flag.IntVar(&opt.timeout, "t", 80, "client quit timeout")
 	flag.StringVar(&opt.caFile, "ca", "", "caFile")	//your/path/pki/ca.crt
 }
 
@@ -49,7 +49,7 @@ func NewPingpongClient(opt *options) *PingpongClient {
 		ppService:	pingpongclient.NewPingpongService(opt.size),
 		sessions:   make(map[string]*shiran.Session),
 	}
-	ppClient.client = shiran.NewClient("localhost:8848", opt.num, ppClient.register, ppClient.unregister, []byte(opt.aesKey))
+	ppClient.client = shiran.NewClient("127.0.0.1:8848", opt.num, ppClient.register, ppClient.unregister, []byte(opt.aesKey))
 	return ppClient
 }
 

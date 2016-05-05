@@ -1,0 +1,24 @@
+{
+	"caFile": "/home/noahsark/gen-ca/easyrsa3/pki/ca.crt",
+	"loginAddress":	[
+		"127.0.0.1:10001",
+		"127.0.0.1:10011"
+	],
+	"accounts": [
+	{
+		"name":	"LiLei",
+		"passwd": "3c9e52dcc1a86148981af544e479cc7abedae4b2a1ff426d24c0eac03d79c406",
+		"zone": 1001	
+	},
+	{
+		"name":	"HanMeimei",
+		"passwd": "9840e290450c85ee188ec70c74e8a7fdfbaa086d15cae81324bf4033023958f2",
+		"zone":	1002
+	},
+	{
+		"name":	"Jim",
+		"passwd": "5f84218b0a3ea0f41d873fb6e2a1fc7b7f80a95636d928a4703fce63b64b2c80",
+		"zone": 1001
+	}
+	]
+}

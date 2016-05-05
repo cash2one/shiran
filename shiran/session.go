@@ -37,6 +37,10 @@ func NewSession(id int64, conn net.Conn, serviceGetter ServiceGetter, aesKey []b
 	return session
 }
 
+func (session *Session) SetAesCodec(aesKey []byte) {
+	session.codec = NewSessionAesCodec(session.conn, aesKey)
+}
+
 func (session *Session) Close() {
 	if session.Closed == false {
 		glog.Infof("Session.DOWN Name:%s LocalAddr:%s RemoteAddr:%s", session.Name, session.conn.LocalAddr().String(), session.conn.RemoteAddr().String())

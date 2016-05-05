@@ -1,0 +1,19 @@
+package userproto;
+option go_package = "userproto";
+
+//user->gate
+message UserLoginGateRequest {
+  required string name = 1;
+  required bytes encryptedKey = 2;
+}
+
+enum UserLoginGateState {
+  kEncryptError = 0;
+  kNameError = 1;
+  kLoginGateSuccess = 2;
+}
+
+//gate->user
+message UserLoginGateResponse {
+  required UserLoginGateState state = 1;
+}

@@ -1,0 +1,15 @@
+package gatelogin;
+option go_package = "gatelogin";
+
+//gate->login
+message GateLoginRequest {
+  required int32 zone = 1;
+  required string gateListenAddress = 2;
+}
+
+//login->gate
+message UserRandomKeyRequest {
+  required int32 zone = 1;
+  required string name = 2;
+  required bytes randomKey = 3;
+}

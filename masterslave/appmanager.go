@@ -6,6 +6,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/williammuji/shiran/shiran"
 	"github.com/golang/glog"
+	"bytes"
+	"fmt"
 )
 
 type Application struct {
@@ -255,6 +257,10 @@ func (am *AppManager) deadApp(request *DeadApplicationRequest, session *shiran.S
 func (app *Application) start(am *AppManager, session *shiran.Session) {
 	prevState := app.status.GetState()
 	app.cmd = exec.Command(app.request.GetBinary(), app.request.GetArgs() ...)
+	var stdout bytes.Buffer
+	var stderr bytes.Buffer
+	app.cmd.Stdout = &stdout
+	app.cmd.Stderr = &stderr
 	err := app.cmd.Start()
 	if err != nil {
 		app.status.State = ApplicationState_kError.Enum()
@@ -267,10 +273,14 @@ func (app *Application) start(am *AppManager, session *shiran.Session) {
 		glog.Infof("start app:%s success pid:%d Process.Pid:%d Getpid:%d Getppid:%d state:%s args:%v", app.status.GetName(), app.status.GetPid(), app.cmd.Process.Pid, os.Getpid(), os.Getppid(), app.status.GetState(), app.cmd.Args)
 	}
 
-	go func(prevState ApplicationState, app *Application) {
+	go func(prevState ApplicationState, app *Application, stdout, stderr *bytes.Buffer) {
 		glog.Infof("start app:%s Waiting for command to finish...", app.status.GetName())
 		err := app.cmd.Wait()
 		glog.Infof("start app:%s Command finished with error: %v", app.status.GetName(), err)
+		if err != nil {
+			glog.Errorf("%s : %s", fmt.Sprint(err), stderr.String())
+		}
+		glog.Infof("Result: %s", stdout.String())
 
 		deadRequest := &DeadApplicationRequest{}
 		deadRequest.AppName = app.status.Name
@@ -284,5 +294,5 @@ func (app *Application) start(am *AppManager, session *shiran.Session) {
 			msg:			deadRequest,
 			session:		session,
 		})
-	}(prevState, app)
+	}(prevState, app, &stdout, &stderr)
 }

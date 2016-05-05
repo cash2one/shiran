@@ -1,0 +1,22 @@
+package userproto;
+option go_package = "userproto";
+
+//user->login
+message UserLoginLoginRequest {
+  required string name = 1;
+  required string passwd = 2;
+  required int32 zone = 3;
+}
+
+enum UserLoginLoginState {
+  kDatabaseError = 0;
+  kNamePasswdError = 1;
+  kLoginLoginSuccess = 2;
+}
+
+//login->user
+message UserLoginLoginResponse {
+  required UserLoginLoginState state = 1;
+  required bytes randomKey = 2;
+  required string gateListenAddress = 3;
+}

@@ -6,14 +6,56 @@
 		"name": "FJSlave",
 		"app": [
 		{
-			"name": "ppserver",
-			"bin": "pingpongserver",
-			"arg": []
+			"name": "loginA",
+			"bin": "/home/noahsark/goyard/bin/login",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:10001",
+					"--listenGateAddress=127.0.0.1:10002",
+					"--crt=/home/noahsark/gen-ca/easyrsa3/pki/issued/localhost.crt",
+					"--key=/home/noahsark/gen-ca/easyrsa3/pki/private/localhost.key",
+					"--ca=/home/noahsark/gen-ca/easyrsa3/pki/ca.crt"]
 		},
 		{
-			"name": "ppclient",
-			"bin": "pingpongclient",
-			"arg": []
+			"name": "loginB",
+			"bin": "/home/noahsark/goyard/bin/login",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:10011",
+					"--listenGateAddress=127.0.0.1:10012",
+					"--crt=/home/noahsark/gen-ca/easyrsa3/pki/issued/localhost.crt",
+					"--key=/home/noahsark/gen-ca/easyrsa3/pki/private/localhost.key",
+					"--ca=/home/noahsark/gen-ca/easyrsa3/pki/ca.crt"]
+		},
+		{
+			"name": "gateA_1001",
+			"bin": "gate",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:11001",
+					"--zone=1001",
+					"--loginAddress=127.0.0.1:10002;127.0.0.1:10012"]
+		},
+		{
+			"name": "gateB_1001",
+			"bin": "gate",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:11002",
+					"--zone=1001",
+					"--loginAddress=127.0.0.1:10002;127.0.0.1:10012"]
+		},
+		{
+			"name": "gateA_1002",
+			"bin": "gate",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:11101",
+					"--zone=1002",
+					"--loginAddress=127.0.0.1:10002;127.0.0.1:10012"]
+		},
+		{
+			"name": "gateB_1002",
+			"bin": "gate",
+			"arg": ["--log_dir=./",
+					"--listenAddress=127.0.0.1:11102",
+					"--zone=1002",
+					"--loginAddress=127.0.0.1:10002;127.0.0.1:10012"]
 		}
 		]
 	}
