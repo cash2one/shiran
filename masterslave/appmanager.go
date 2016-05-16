@@ -29,6 +29,7 @@ const (
 	GET
 	//internal
 	DEAD
+	HEARTBEAT
 )
 
 type Event struct {
@@ -40,6 +41,7 @@ type Event struct {
 type AppManager struct {
 	eventChannel		chan Event
 	apps				map[string]*Application
+	hbMsg				chan *SlaveHeartbeat
 }
 
 func NewAppManager() *AppManager {
@@ -88,6 +90,10 @@ func (am *AppManager) eventLoop() {
 		case DEAD:
 			if request, ok := event.msg.(*DeadApplicationRequest); ok {
 				am.deadApp(request, event.session)
+			}
+		case HEARTBEAT:
+			if request, ok := event.msg.(*SlaveHeartbeat); ok {
+				event.session.SendMessage("MasterService", "HandleSlaveHeartbeat", request)
 			}
 		}
 	}
@@ -274,13 +280,14 @@ func (app *Application) start(am *AppManager, session *shiran.Session) {
 	}
 
 	go func(prevState ApplicationState, app *Application, stdout, stderr *bytes.Buffer) {
-		glog.Infof("start app:%s Waiting for command to finish...", app.status.GetName())
+		glog.Infof("start app:%s(%d) Waiting for command to finish...", app.status.GetName(), app.status.Pid)
 		err := app.cmd.Wait()
-		glog.Infof("start app:%s Command finished with error: %v", app.status.GetName(), err)
+		glog.Infof("start app:%s(%d) Command finished with error: %v", app.status.GetName(), app.status.Pid, err)
 		if err != nil {
-			glog.Errorf("%s : %s", fmt.Sprint(err), stderr.String())
+			glog.Errorf("app:%s(%d) %s : %s", app.status.GetName(), app.cmd.ProcessState.Pid(), fmt.Sprint(err), stderr.String())
 		}
-		glog.Infof("Result: %s", stdout.String())
+		glog.Infof("%s(%d) Stdout: %s", app.status.GetName(), app.cmd.ProcessState.Pid(), stdout.String())
+		glog.Infof("%s(%d) Exit status: %s", app.status.GetName(), app.cmd.ProcessState.Pid(), app.cmd.ProcessState)
 
 		deadRequest := &DeadApplicationRequest{}
 		deadRequest.AppName = app.status.Name

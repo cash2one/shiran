@@ -4,14 +4,14 @@
 #./easyrsa build-ca
 #./easyrsa --subject-alt-name=DNS:*.a.com,DNS:*.b.com,DNS:*.c.com build-server-full *.a.com nopass
 
-USERPROTO_PROTO_PATH=~/goyard/src/github.com/williammuji/shiran/proto/userproto/
-USERPROTO_GO_OUT=~/goyard/src/github.com/williammuji/shiran/proto/userproto/
+USERPROTO_PROTO_PATH=${GOPATH}/src/github.com/williammuji/shiran/proto/userproto/
+USERPROTO_GO_OUT=${GOPATH}/src/github.com/williammuji/shiran/proto/userproto/
 
-GATELOGIN_PROTO_PATH=~/goyard/src/github.com/williammuji/shiran/proto/gatelogin/
-GATELOGIN_GO_OUT=~/goyard/src/github.com/williammuji/shiran/proto/gatelogin/
+GATELOGIN_PROTO_PATH=${GOPATH}/src/github.com/williammuji/shiran/proto/gatelogin/
+GATELOGIN_GO_OUT=${GOPATH}/src/github.com/williammuji/shiran/proto/gatelogin/
 
-MASTERSLAVE_PROTO_PATH=~/goyard/src/github.com/williammuji/shiran/masterslave
-MASTERSLAVE_GO_OUT=~/goyard/src/github.com/williammuji/shiran/masterslave
+MASTERSLAVE_PROTO_PATH=${GOPATH}/src/github.com/williammuji/shiran/masterslave
+MASTERSLAVE_GO_OUT=${GOPATH}/src/github.com/williammuji/shiran/masterslave
 
 protoc --proto_path=${USERPROTO_PROTO_PATH} --go_out=${USERPROTO_GO_OUT} ${USERPROTO_PROTO_PATH}/*.proto
 protoc --proto_path=${GATELOGIN_PROTO_PATH} --go_out=${GATELOGIN_GO_OUT} ${GATELOGIN_PROTO_PATH}/*.proto
@@ -32,3 +32,5 @@ go install github.com/williammuji/shiran/gate
 go install github.com/williammuji/shiran/gate/gate
 go install github.com/williammuji/shiran/client
 go install github.com/williammuji/shiran/client/client
+
+cp run.sh ${GOPATH}/bin

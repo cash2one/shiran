@@ -9,6 +9,7 @@ import (
 type SlaveConfig struct {
 	Name				string
 	MasterAddress		string
+	HeartbeatInterval	int
 }
 
 func NewSlaveConfig(fileName string) *SlaveConfig {

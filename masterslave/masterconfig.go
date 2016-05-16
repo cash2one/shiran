@@ -13,8 +13,8 @@ type MasterSlaveAppConfig struct {
 }
 
 type MasterSlaveConfig struct {
-	Name		string
-	App			[]MasterSlaveAppConfig
+	Name				string
+	App					[]MasterSlaveAppConfig
 }
 
 type MasterConfig struct {

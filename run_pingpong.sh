@@ -1,6 +1,6 @@
-MASTERCONFIG=~/goyard/src/github.com/williammuji/shiran/master/masterconfig.json
-SLAVECONFIG=~/goyard/src/github.com/williammuji/shiran/master/slaveconfig.json
-COMMANDERCONFIG=~/goyard/src/github.com/williammuji/shiran/master/masterconfig_pingpong.json
+MASTERCONFIG=${GOPATH}/src/github.com/williammuji/shiran/master/masterconfig.json
+SLAVECONFIG=${GOPATH}/src/github.com/williammuji/shiran/master/slaveconfig.json
+COMMANDERCONFIG=${GOPATH}/src/github.com/williammuji/shiran/master/masterconfig_pingpong.json
 
 ./master --configFile=${MASTERCONFIG} --log_dir="./" &
 sleep 1

@@ -141,3 +141,92 @@ message AddCommanderRequest {
 
 message RemoveCommanderRequest {
 }
+
+message GetHardwareRequest {
+  optional bool lshw = 1 [default = false];
+  required SlaveCommander slave_commander = 2;
+}
+
+message GetHardwareResponse {
+  optional string lspci = 1;
+  optional string lscpu = 2;
+  optional string lshw = 3;
+  optional string ifconfig = 4;
+  required SlaveCommander slave_commander = 5;
+}
+
+message GetFileContentRequest {
+  required string file_name = 1;
+  optional int64 max_size = 2 [default = 1048576];
+  // optional int64 offset = 3 [default = 0];
+  required SlaveCommander slave_commander = 4;
+}
+
+message GetFileContentResponse {
+  required string error_code = 1;
+  optional bytes content = 2;
+  optional int64 file_size = 3;
+  optional int64 modify_time = 4;
+  optional int64 create_time = 5;
+  required SlaveCommander slave_commander = 6;
+}
+
+message GetFileChecksumRequest {
+  repeated string files = 1;
+  required SlaveCommander slave_commander = 2;
+}
+
+message GetFileChecksumResponse {
+  repeated string md5sums = 1;
+  required SlaveCommander slave_commander = 2;
+}
+
+message RunCommandRequest {
+  required string command = 1;
+  optional string cwd = 2 [default = "/tmp"];
+  repeated string args = 3;
+  repeated string envs = 4;
+  optional bool envs_only = 5 [default = false];
+  optional int32 max_stdout = 6 [default = 1048576];
+  optional int32 max_stderr = 7 [default = 1048576];
+  optional int32 timeout = 8 [default = 60];
+  optional int32 max_memory_mb = 9 [default = 32768];
+  required SlaveCommander slave_commander = 10;
+}
+
+message RunCommandResponse {
+  required string error_code = 1;
+  optional int32 pid = 2;
+  optional string status = 3;
+  optional bytes std_output = 4;
+  optional bytes std_error = 5;
+  optional string executable_file = 6;
+
+  optional int64 start_time_us  = 16;
+  optional int64 finish_time_us = 17;
+  optional int64 user_time      = 18;
+  optional int64 system_time    = 19;
+
+  optional int64 memory_maxrss_kb = 20;
+  // optional int64 ctxsw = 11;
+
+  optional int32 exit_status = 30 [default = 0];
+  optional int32 signaled = 31 [default = 0];
+  optional bool coredump = 32 [default = false];
+  required SlaveCommander slave_commander = 40;
+}
+
+message RunScriptRequest {
+  required bytes script = 1;
+  optional string cwd = 2 [default = "/tmp"];
+  repeated string args = 3;
+  repeated string envs = 4;
+  optional bool envs_only = 5 [default = false];
+  optional int32 max_stdout = 6 [default = 1048576];
+  optional int32 max_stderr = 7 [default = 1048576];
+  optional int32 timeout = 8 [default = 60];
+  optional int32 max_memory_mb = 9 [default = 32768];
+  optional string interpreter = 10;
+  repeated string interpreter_args = 11;
+  required SlaveCommander slave_commander = 12;
+}

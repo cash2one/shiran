@@ -30,6 +30,19 @@ const (
 	RESTARTAPPRESPONSE
 	GETAPPSRESPONSE
 	LISTAPPSRESPONSE
+
+	GETHARDWARE
+	GETHARDWARERESPONSE
+
+	GETFILECONTENT
+	GETFILECONTENTRESPONSE
+
+	GETFILECHECKSUM
+	GETFILECHECKSUMRESPONSE
+
+	RUNCOMMAND
+	RUNCOMMANDRESPONSE
+	RUNSCRIPT
 )
 
 type SlaveEvent struct {
@@ -167,6 +180,51 @@ func (am *SlaveManager) eventLoop() {
 					glog.Errorf("eventLoop LISTAPPS slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
 				}
 			}
+		case GETHARDWARE:
+			if request, ok := event.msg.(*GetHardwareRequest); ok {
+				if session, exist := am.slaves[request.GetSlaveCommander().GetSlaveName()]; exist {
+					request.SlaveCommander.CommanderName = &event.session.Name
+					session.SendMessage("SlaveService", "HandleGetHardwareRequest", request)
+				} else {
+					glog.Errorf("eventLoop GETHARDWARE slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
+				}
+			}
+		case GETFILECONTENT:
+			if request, ok := event.msg.(*GetFileContentRequest); ok {
+				if session, exist := am.slaves[request.GetSlaveCommander().GetSlaveName()]; exist {
+					request.SlaveCommander.CommanderName = &event.session.Name
+					session.SendMessage("SlaveService", "HandleGetFileContentRequest", request)
+				} else {
+					glog.Errorf("eventLoop GETFILECONTENT slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
+				}
+			}
+		case GETFILECHECKSUM:
+			if request, ok := event.msg.(*GetFileChecksumRequest); ok {
+				if session, exist := am.slaves[request.GetSlaveCommander().GetSlaveName()]; exist {
+					request.SlaveCommander.CommanderName = &event.session.Name
+					session.SendMessage("SlaveService", "HandleGetFileChecksumRequest", request)
+				} else {
+					glog.Errorf("eventLoop GETFILECHECKSUM slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
+				}
+			}
+		case RUNCOMMAND:
+			if request, ok := event.msg.(*RunCommandRequest); ok {
+				if session, exist := am.slaves[request.GetSlaveCommander().GetSlaveName()]; exist {
+					request.SlaveCommander.CommanderName = &event.session.Name
+					session.SendMessage("SlaveService", "HandleRunCommandRequest", request)
+				} else {
+					glog.Errorf("eventLoop RUNCOMMAND slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
+				}
+			}
+		case RUNSCRIPT:
+			if request, ok := event.msg.(*RunScriptRequest); ok {
+				if session, exist := am.slaves[request.GetSlaveCommander().GetSlaveName()]; exist {
+					request.SlaveCommander.CommanderName = &event.session.Name
+					session.SendMessage("SlaveService", "HandleRunScriptRequest", request)
+				} else {
+					glog.Errorf("eventLoop RUNSCRIPT slaveName:%s not exist", request.GetSlaveCommander().GetSlaveName())
+				}
+			}
 			//app response
 		case ADDAPPRESPONSE:
 			if response, ok := event.msg.(*AddApplicationResponse); ok {
@@ -222,6 +280,38 @@ func (am *SlaveManager) eventLoop() {
 					session.SendMessage("CommanderService", "HandleRemoveApplicationsResponse", response)
 				} else {
 					glog.Errorf("eventLoop REMOVEAPPSRESPONSE commanderName:%s not exist", response.GetSlaveCommander().GetCommanderName())
+				}
+			}
+		case GETHARDWARERESPONSE:
+			if response, ok := event.msg.(*GetHardwareResponse); ok {
+				if session, exist := am.commanders[response.GetSlaveCommander().GetCommanderName()]; exist {
+					session.SendMessage("CommanderService", "HandleGetHardwareResponse", response)
+				} else {
+					glog.Errorf("eventLoop GETHARDWARERESPONSE commanderName:%s not exist", response.GetSlaveCommander().GetCommanderName())
+				}
+			}
+		case GETFILECONTENTRESPONSE:
+			if response, ok := event.msg.(*GetFileContentResponse); ok {
+				if session, exist := am.commanders[response.GetSlaveCommander().GetCommanderName()]; exist {
+					session.SendMessage("CommanderService", "HandleGetFileContentResponse", response)
+				} else {
+					glog.Errorf("eventLoop GETFILECONTENTRESPONSE commanderName:%s not exist", response.GetSlaveCommander().GetCommanderName())
+				}
+			}
+		case GETFILECHECKSUMRESPONSE:
+			if response, ok := event.msg.(*GetFileChecksumResponse); ok {
+				if session, exist := am.commanders[response.GetSlaveCommander().GetCommanderName()]; exist {
+					session.SendMessage("CommanderService", "HandleGetFileChecksumResponse", response)
+				} else {
+					glog.Errorf("eventLoop GETFILECHECKSUMRESPONSE commanderName:%s not exist", response.GetSlaveCommander().GetCommanderName())
+				}
+			}
+		case RUNCOMMANDRESPONSE:
+			if response, ok := event.msg.(*RunCommandResponse); ok {
+				if session, exist := am.commanders[response.GetSlaveCommander().GetCommanderName()]; exist {
+					session.SendMessage("CommanderService", "HandleRunCommandResponse", response)
+				} else {
+					glog.Errorf("eventLoop RUNCOMMANDRESPONSE commanderName:%s not exist", response.GetSlaveCommander().GetCommanderName())
 				}
 			}
 		}

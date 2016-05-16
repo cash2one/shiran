@@ -2,6 +2,7 @@ package masterslave
 
 import (
 	"time"
+	"io/ioutil"
 	"runtime"
 	"github.com/williammuji/shiran/shiran"
 	"github.com/golang/glog"
@@ -19,6 +20,21 @@ type CommandOptions struct {
 	List			bool
 	AppName			string
 	AppNames		[]string
+	GetHardware		bool
+	Lshw			bool
+	GetFileContent	bool
+	FileName		string
+	MaxSize			int64
+	GetFileChecksum	bool
+	Files			[]string
+	RunCommand		bool
+	Command			string
+	Args			[]string
+	MaxStdout		int
+	MaxStderr		int
+	Timeout			int
+	RunScript		bool
+	Script			string	
 }
 
 type Commander struct {
@@ -92,6 +108,16 @@ func (c *Commander) onConnection() {
 		c.getApps(c.opt.SlaveName, c.opt.AppNames)
 	} else if c.opt.List == true {
 		c.listApps(c.opt.SlaveName)
+	} else if c.opt.GetHardware == true {
+		c.getHardware(c.opt.SlaveName, c.opt.Lshw)
+	} else if c.opt.GetFileContent == true {
+		c.getFileContent(c.opt.SlaveName, c.opt.FileName, c.opt.MaxSize)
+	} else if c.opt.GetFileChecksum == true {
+		c.getFileChecksum(c.opt.SlaveName, c.opt.Files)
+	} else if c.opt.RunCommand == true {
+		c.runCommand(c.opt.SlaveName, c.opt.Command, c.opt.Args, int32(c.opt.MaxStdout), int32(c.opt.MaxStderr), int32(c.opt.Timeout))
+	} else if c.opt.RunScript == true {
+		c.runScript(c.opt.SlaveName, c.opt.Script, int32(c.opt.MaxStdout), int32(c.opt.MaxStderr), int32(c.opt.Timeout))
 	}
 }
 
@@ -135,7 +161,7 @@ func (c *Commander) restartApp(slaveName, appName string) {
 	c.session.SendMessage("MasterService", "HandleRestartApplicationRequest", msg)
 }
 
-func (c *Commander) getApps(slaveName string, appNames[] string) {
+func (c *Commander) getApps(slaveName string, appNames []string) {
 	msg := new(GetApplicationsRequest)
 	msg.Names = appNames
 	msg.SlaveCommander = new(SlaveCommander)
@@ -152,4 +178,58 @@ func (c *Commander) listApps(slaveName string) {
 
 func (c *Commander) close() {
 	c.quit <- true
+}
+
+func (c *Commander) getHardware(slaveName string, lshw bool) {
+	msg := new(GetHardwareRequest)
+	msg.SlaveCommander = new(SlaveCommander)
+	msg.SlaveCommander.SlaveName = &slaveName
+	msg.Lshw = &lshw
+	c.session.SendMessage("MasterService", "HandleGetHardwareRequest", msg)
+}
+
+func (c *Commander) getFileContent(slaveName, fileName string, maxSize int64) {
+	msg := new(GetFileContentRequest)
+	msg.SlaveCommander = new(SlaveCommander)
+	msg.SlaveCommander.SlaveName = &slaveName
+	msg.FileName = &fileName
+	msg.MaxSize = &maxSize
+	c.session.SendMessage("MasterService", "HandleGetFileContentRequest", msg)
+}
+
+func (c *Commander) getFileChecksum(slaveName string, fileNames []string) {
+	msg := new(GetFileChecksumRequest)
+	msg.SlaveCommander = new(SlaveCommander)
+	msg.SlaveCommander.SlaveName = &slaveName
+	msg.Files = fileNames
+	c.session.SendMessage("MasterService", "HandleGetFileChecksumRequest", msg)
+}
+
+func (c *Commander) runCommand(slaveName string, command string, args []string, maxstdout, maxstderr int32, timeout int32) {
+	msg := new(RunCommandRequest)
+	msg.SlaveCommander = new(SlaveCommander)
+	msg.SlaveCommander.SlaveName = &slaveName
+	msg.Command = &command
+	msg.Args = args
+	msg.MaxStdout = &maxstdout
+	msg.MaxStderr = &maxstderr
+	msg.Timeout = &timeout
+	c.session.SendMessage("MasterService", "HandleRunCommandRequest", msg)
+}
+
+func (c *Commander) runScript(slaveName string, script string, maxstdout, maxstderr int32, timeout int32) {
+	msg := new(RunScriptRequest)
+	msg.SlaveCommander = new(SlaveCommander)
+	msg.SlaveCommander.SlaveName = &slaveName
+
+	buffer, fileErr := ioutil.ReadFile(script)
+	if fileErr != nil {
+		glog.Errorf("load script %s failed %s", script, fileErr)
+	} else {
+		msg.Script = buffer
+	}
+	msg.MaxStdout = &maxstdout
+	msg.MaxStderr = &maxstderr
+	msg.Timeout = &timeout
+	c.session.SendMessage("MasterService", "HandleRunScriptRequest", msg)
 }

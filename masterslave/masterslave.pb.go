@@ -2,35 +2,6 @@
 // source: masterslave.proto
 // DO NOT EDIT!
 
-/*
-Package masterslave is a generated protocol buffer package.
-
-It is generated from these files:
-	masterslave.proto
-
-It has these top-level messages:
-	ApplicationStatus
-	SlaveCommander
-	AddApplicationRequest
-	AddApplicationResponse
-	StartApplicationsRequest
-	StartApplicationsResponse
-	StopApplicationRequest
-	StopApplicationResponse
-	RestartApplicationRequest
-	RestartApplicationResponse
-	GetApplicationsRequest
-	GetApplicationsResponse
-	ListApplicationsRequest
-	ListApplicationsResponse
-	RemoveApplicationsRequest
-	RemoveApplicationsResponse
-	DeadApplicationRequest
-	AddSlaveRequest
-	RemoveSlaveRequest
-	AddCommanderRequest
-	RemoveCommanderRequest
-*/
 package masterslave
 
 import proto "github.com/golang/protobuf/proto"
@@ -41,10 +12,6 @@ import math "math"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
-const _ = proto.ProtoPackageIsVersion1
 
 // application
 type ApplicationState int32
@@ -94,7 +61,7 @@ func (x *ApplicationState) UnmarshalJSON(data []byte) error {
 	*x = ApplicationState(value)
 	return nil
 }
-func (ApplicationState) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (ApplicationState) EnumDescriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
 type ApplicationStatus struct {
 	State            *ApplicationState `protobuf:"varint,1,req,name=state,enum=masterslave.ApplicationState,def=0" json:"state,omitempty"`
@@ -117,7 +84,7 @@ type ApplicationStatus struct {
 func (m *ApplicationStatus) Reset()                    { *m = ApplicationStatus{} }
 func (m *ApplicationStatus) String() string            { return proto.CompactTextString(m) }
 func (*ApplicationStatus) ProtoMessage()               {}
-func (*ApplicationStatus) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (*ApplicationStatus) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
 const Default_ApplicationStatus_State ApplicationState = ApplicationState_kUnknown
 
@@ -228,7 +195,7 @@ type SlaveCommander struct {
 func (m *SlaveCommander) Reset()                    { *m = SlaveCommander{} }
 func (m *SlaveCommander) String() string            { return proto.CompactTextString(m) }
 func (*SlaveCommander) ProtoMessage()               {}
-func (*SlaveCommander) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*SlaveCommander) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
 
 func (m *SlaveCommander) GetSlaveName() string {
 	if m != nil && m.SlaveName != nil {
@@ -264,7 +231,7 @@ type AddApplicationRequest struct {
 func (m *AddApplicationRequest) Reset()                    { *m = AddApplicationRequest{} }
 func (m *AddApplicationRequest) String() string            { return proto.CompactTextString(m) }
 func (*AddApplicationRequest) ProtoMessage()               {}
-func (*AddApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*AddApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
 
 const Default_AddApplicationRequest_EnvsOnly bool = false
 const Default_AddApplicationRequest_RedirectStdout bool = true
@@ -373,7 +340,7 @@ type AddApplicationResponse struct {
 func (m *AddApplicationResponse) Reset()                    { *m = AddApplicationResponse{} }
 func (m *AddApplicationResponse) String() string            { return proto.CompactTextString(m) }
 func (*AddApplicationResponse) ProtoMessage()               {}
-func (*AddApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*AddApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
 
 func (m *AddApplicationResponse) GetStatus() *ApplicationStatus {
 	if m != nil {
@@ -412,7 +379,7 @@ type StartApplicationsRequest struct {
 func (m *StartApplicationsRequest) Reset()                    { *m = StartApplicationsRequest{} }
 func (m *StartApplicationsRequest) String() string            { return proto.CompactTextString(m) }
 func (*StartApplicationsRequest) ProtoMessage()               {}
-func (*StartApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*StartApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
 
 func (m *StartApplicationsRequest) GetNames() []string {
 	if m != nil {
@@ -437,7 +404,7 @@ type StartApplicationsResponse struct {
 func (m *StartApplicationsResponse) Reset()                    { *m = StartApplicationsResponse{} }
 func (m *StartApplicationsResponse) String() string            { return proto.CompactTextString(m) }
 func (*StartApplicationsResponse) ProtoMessage()               {}
-func (*StartApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*StartApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
 
 func (m *StartApplicationsResponse) GetStatus() []*ApplicationStatus {
 	if m != nil {
@@ -462,7 +429,7 @@ type StopApplicationRequest struct {
 func (m *StopApplicationRequest) Reset()                    { *m = StopApplicationRequest{} }
 func (m *StopApplicationRequest) String() string            { return proto.CompactTextString(m) }
 func (*StopApplicationRequest) ProtoMessage()               {}
-func (*StopApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*StopApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
 
 func (m *StopApplicationRequest) GetName() string {
 	if m != nil && m.Name != nil {
@@ -487,7 +454,7 @@ type StopApplicationResponse struct {
 func (m *StopApplicationResponse) Reset()                    { *m = StopApplicationResponse{} }
 func (m *StopApplicationResponse) String() string            { return proto.CompactTextString(m) }
 func (*StopApplicationResponse) ProtoMessage()               {}
-func (*StopApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*StopApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
 
 func (m *StopApplicationResponse) GetStatus() *ApplicationStatus {
 	if m != nil {
@@ -512,7 +479,7 @@ type RestartApplicationRequest struct {
 func (m *RestartApplicationRequest) Reset()                    { *m = RestartApplicationRequest{} }
 func (m *RestartApplicationRequest) String() string            { return proto.CompactTextString(m) }
 func (*RestartApplicationRequest) ProtoMessage()               {}
-func (*RestartApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*RestartApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
 
 func (m *RestartApplicationRequest) GetName() string {
 	if m != nil && m.Name != nil {
@@ -537,7 +504,7 @@ type RestartApplicationResponse struct {
 func (m *RestartApplicationResponse) Reset()                    { *m = RestartApplicationResponse{} }
 func (m *RestartApplicationResponse) String() string            { return proto.CompactTextString(m) }
 func (*RestartApplicationResponse) ProtoMessage()               {}
-func (*RestartApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*RestartApplicationResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{9} }
 
 func (m *RestartApplicationResponse) GetStatus() *ApplicationStatus {
 	if m != nil {
@@ -562,7 +529,7 @@ type GetApplicationsRequest struct {
 func (m *GetApplicationsRequest) Reset()                    { *m = GetApplicationsRequest{} }
 func (m *GetApplicationsRequest) String() string            { return proto.CompactTextString(m) }
 func (*GetApplicationsRequest) ProtoMessage()               {}
-func (*GetApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*GetApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{10} }
 
 func (m *GetApplicationsRequest) GetNames() []string {
 	if m != nil {
@@ -587,7 +554,7 @@ type GetApplicationsResponse struct {
 func (m *GetApplicationsResponse) Reset()                    { *m = GetApplicationsResponse{} }
 func (m *GetApplicationsResponse) String() string            { return proto.CompactTextString(m) }
 func (*GetApplicationsResponse) ProtoMessage()               {}
-func (*GetApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (*GetApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{11} }
 
 func (m *GetApplicationsResponse) GetStatus() []*ApplicationStatus {
 	if m != nil {
@@ -611,7 +578,7 @@ type ListApplicationsRequest struct {
 func (m *ListApplicationsRequest) Reset()                    { *m = ListApplicationsRequest{} }
 func (m *ListApplicationsRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListApplicationsRequest) ProtoMessage()               {}
-func (*ListApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+func (*ListApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{12} }
 
 func (m *ListApplicationsRequest) GetSlaveCommander() *SlaveCommander {
 	if m != nil {
@@ -629,7 +596,7 @@ type ListApplicationsResponse struct {
 func (m *ListApplicationsResponse) Reset()                    { *m = ListApplicationsResponse{} }
 func (m *ListApplicationsResponse) String() string            { return proto.CompactTextString(m) }
 func (*ListApplicationsResponse) ProtoMessage()               {}
-func (*ListApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+func (*ListApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{13} }
 
 func (m *ListApplicationsResponse) GetNames() []string {
 	if m != nil {
@@ -654,7 +621,7 @@ type RemoveApplicationsRequest struct {
 func (m *RemoveApplicationsRequest) Reset()                    { *m = RemoveApplicationsRequest{} }
 func (m *RemoveApplicationsRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveApplicationsRequest) ProtoMessage()               {}
-func (*RemoveApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
+func (*RemoveApplicationsRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{14} }
 
 func (m *RemoveApplicationsRequest) GetNames() []string {
 	if m != nil {
@@ -678,7 +645,7 @@ type RemoveApplicationsResponse struct {
 func (m *RemoveApplicationsResponse) Reset()                    { *m = RemoveApplicationsResponse{} }
 func (m *RemoveApplicationsResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveApplicationsResponse) ProtoMessage()               {}
-func (*RemoveApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+func (*RemoveApplicationsResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{15} }
 
 func (m *RemoveApplicationsResponse) GetSlaveCommander() *SlaveCommander {
 	if m != nil {
@@ -699,7 +666,7 @@ type DeadApplicationRequest struct {
 func (m *DeadApplicationRequest) Reset()                    { *m = DeadApplicationRequest{} }
 func (m *DeadApplicationRequest) String() string            { return proto.CompactTextString(m) }
 func (*DeadApplicationRequest) ProtoMessage()               {}
-func (*DeadApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
+func (*DeadApplicationRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{16} }
 
 func (m *DeadApplicationRequest) GetAppName() string {
 	if m != nil && m.AppName != nil {
@@ -745,7 +712,7 @@ type AddSlaveRequest struct {
 func (m *AddSlaveRequest) Reset()                    { *m = AddSlaveRequest{} }
 func (m *AddSlaveRequest) String() string            { return proto.CompactTextString(m) }
 func (*AddSlaveRequest) ProtoMessage()               {}
-func (*AddSlaveRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
+func (*AddSlaveRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{17} }
 
 func (m *AddSlaveRequest) GetSlaveName() string {
 	if m != nil && m.SlaveName != nil {
@@ -761,7 +728,7 @@ type RemoveSlaveRequest struct {
 func (m *RemoveSlaveRequest) Reset()                    { *m = RemoveSlaveRequest{} }
 func (m *RemoveSlaveRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveSlaveRequest) ProtoMessage()               {}
-func (*RemoveSlaveRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+func (*RemoveSlaveRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{18} }
 
 // master-commander
 type AddCommanderRequest struct {
@@ -771,7 +738,7 @@ type AddCommanderRequest struct {
 func (m *AddCommanderRequest) Reset()                    { *m = AddCommanderRequest{} }
 func (m *AddCommanderRequest) String() string            { return proto.CompactTextString(m) }
 func (*AddCommanderRequest) ProtoMessage()               {}
-func (*AddCommanderRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
+func (*AddCommanderRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{19} }
 
 type RemoveCommanderRequest struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -780,7 +747,567 @@ type RemoveCommanderRequest struct {
 func (m *RemoveCommanderRequest) Reset()                    { *m = RemoveCommanderRequest{} }
 func (m *RemoveCommanderRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveCommanderRequest) ProtoMessage()               {}
-func (*RemoveCommanderRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
+func (*RemoveCommanderRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{20} }
+
+type GetHardwareRequest struct {
+	Lshw             *bool           `protobuf:"varint,1,opt,name=lshw,def=0" json:"lshw,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,2,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetHardwareRequest) Reset()                    { *m = GetHardwareRequest{} }
+func (m *GetHardwareRequest) String() string            { return proto.CompactTextString(m) }
+func (*GetHardwareRequest) ProtoMessage()               {}
+func (*GetHardwareRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{21} }
+
+const Default_GetHardwareRequest_Lshw bool = false
+
+func (m *GetHardwareRequest) GetLshw() bool {
+	if m != nil && m.Lshw != nil {
+		return *m.Lshw
+	}
+	return Default_GetHardwareRequest_Lshw
+}
+
+func (m *GetHardwareRequest) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type GetHardwareResponse struct {
+	Lspci            *string         `protobuf:"bytes,1,opt,name=lspci" json:"lspci,omitempty"`
+	Lscpu            *string         `protobuf:"bytes,2,opt,name=lscpu" json:"lscpu,omitempty"`
+	Lshw             *string         `protobuf:"bytes,3,opt,name=lshw" json:"lshw,omitempty"`
+	Ifconfig         *string         `protobuf:"bytes,4,opt,name=ifconfig" json:"ifconfig,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,5,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetHardwareResponse) Reset()                    { *m = GetHardwareResponse{} }
+func (m *GetHardwareResponse) String() string            { return proto.CompactTextString(m) }
+func (*GetHardwareResponse) ProtoMessage()               {}
+func (*GetHardwareResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{22} }
+
+func (m *GetHardwareResponse) GetLspci() string {
+	if m != nil && m.Lspci != nil {
+		return *m.Lspci
+	}
+	return ""
+}
+
+func (m *GetHardwareResponse) GetLscpu() string {
+	if m != nil && m.Lscpu != nil {
+		return *m.Lscpu
+	}
+	return ""
+}
+
+func (m *GetHardwareResponse) GetLshw() string {
+	if m != nil && m.Lshw != nil {
+		return *m.Lshw
+	}
+	return ""
+}
+
+func (m *GetHardwareResponse) GetIfconfig() string {
+	if m != nil && m.Ifconfig != nil {
+		return *m.Ifconfig
+	}
+	return ""
+}
+
+func (m *GetHardwareResponse) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type GetFileContentRequest struct {
+	FileName *string `protobuf:"bytes,1,req,name=file_name" json:"file_name,omitempty"`
+	MaxSize  *int64  `protobuf:"varint,2,opt,name=max_size,def=1048576" json:"max_size,omitempty"`
+	// optional int64 offset = 3 [default = 0];
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,4,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetFileContentRequest) Reset()                    { *m = GetFileContentRequest{} }
+func (m *GetFileContentRequest) String() string            { return proto.CompactTextString(m) }
+func (*GetFileContentRequest) ProtoMessage()               {}
+func (*GetFileContentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{23} }
+
+const Default_GetFileContentRequest_MaxSize int64 = 1048576
+
+func (m *GetFileContentRequest) GetFileName() string {
+	if m != nil && m.FileName != nil {
+		return *m.FileName
+	}
+	return ""
+}
+
+func (m *GetFileContentRequest) GetMaxSize() int64 {
+	if m != nil && m.MaxSize != nil {
+		return *m.MaxSize
+	}
+	return Default_GetFileContentRequest_MaxSize
+}
+
+func (m *GetFileContentRequest) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type GetFileContentResponse struct {
+	ErrorCode        *string         `protobuf:"bytes,1,req,name=error_code" json:"error_code,omitempty"`
+	Content          []byte          `protobuf:"bytes,2,opt,name=content" json:"content,omitempty"`
+	FileSize         *int64          `protobuf:"varint,3,opt,name=file_size" json:"file_size,omitempty"`
+	ModifyTime       *int64          `protobuf:"varint,4,opt,name=modify_time" json:"modify_time,omitempty"`
+	CreateTime       *int64          `protobuf:"varint,5,opt,name=create_time" json:"create_time,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,6,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetFileContentResponse) Reset()                    { *m = GetFileContentResponse{} }
+func (m *GetFileContentResponse) String() string            { return proto.CompactTextString(m) }
+func (*GetFileContentResponse) ProtoMessage()               {}
+func (*GetFileContentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{24} }
+
+func (m *GetFileContentResponse) GetErrorCode() string {
+	if m != nil && m.ErrorCode != nil {
+		return *m.ErrorCode
+	}
+	return ""
+}
+
+func (m *GetFileContentResponse) GetContent() []byte {
+	if m != nil {
+		return m.Content
+	}
+	return nil
+}
+
+func (m *GetFileContentResponse) GetFileSize() int64 {
+	if m != nil && m.FileSize != nil {
+		return *m.FileSize
+	}
+	return 0
+}
+
+func (m *GetFileContentResponse) GetModifyTime() int64 {
+	if m != nil && m.ModifyTime != nil {
+		return *m.ModifyTime
+	}
+	return 0
+}
+
+func (m *GetFileContentResponse) GetCreateTime() int64 {
+	if m != nil && m.CreateTime != nil {
+		return *m.CreateTime
+	}
+	return 0
+}
+
+func (m *GetFileContentResponse) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type GetFileChecksumRequest struct {
+	Files            []string        `protobuf:"bytes,1,rep,name=files" json:"files,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,2,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetFileChecksumRequest) Reset()                    { *m = GetFileChecksumRequest{} }
+func (m *GetFileChecksumRequest) String() string            { return proto.CompactTextString(m) }
+func (*GetFileChecksumRequest) ProtoMessage()               {}
+func (*GetFileChecksumRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{25} }
+
+func (m *GetFileChecksumRequest) GetFiles() []string {
+	if m != nil {
+		return m.Files
+	}
+	return nil
+}
+
+func (m *GetFileChecksumRequest) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type GetFileChecksumResponse struct {
+	Md5Sums          []string        `protobuf:"bytes,1,rep,name=md5sums" json:"md5sums,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,2,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *GetFileChecksumResponse) Reset()                    { *m = GetFileChecksumResponse{} }
+func (m *GetFileChecksumResponse) String() string            { return proto.CompactTextString(m) }
+func (*GetFileChecksumResponse) ProtoMessage()               {}
+func (*GetFileChecksumResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{26} }
+
+func (m *GetFileChecksumResponse) GetMd5Sums() []string {
+	if m != nil {
+		return m.Md5Sums
+	}
+	return nil
+}
+
+func (m *GetFileChecksumResponse) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type RunCommandRequest struct {
+	Command          *string         `protobuf:"bytes,1,req,name=command" json:"command,omitempty"`
+	Cwd              *string         `protobuf:"bytes,2,opt,name=cwd,def=/tmp" json:"cwd,omitempty"`
+	Args             []string        `protobuf:"bytes,3,rep,name=args" json:"args,omitempty"`
+	Envs             []string        `protobuf:"bytes,4,rep,name=envs" json:"envs,omitempty"`
+	EnvsOnly         *bool           `protobuf:"varint,5,opt,name=envs_only,def=0" json:"envs_only,omitempty"`
+	MaxStdout        *int32          `protobuf:"varint,6,opt,name=max_stdout,def=1048576" json:"max_stdout,omitempty"`
+	MaxStderr        *int32          `protobuf:"varint,7,opt,name=max_stderr,def=1048576" json:"max_stderr,omitempty"`
+	Timeout          *int32          `protobuf:"varint,8,opt,name=timeout,def=60" json:"timeout,omitempty"`
+	MaxMemoryMb      *int32          `protobuf:"varint,9,opt,name=max_memory_mb,def=32768" json:"max_memory_mb,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,10,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *RunCommandRequest) Reset()                    { *m = RunCommandRequest{} }
+func (m *RunCommandRequest) String() string            { return proto.CompactTextString(m) }
+func (*RunCommandRequest) ProtoMessage()               {}
+func (*RunCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{27} }
+
+const Default_RunCommandRequest_Cwd string = "/tmp"
+const Default_RunCommandRequest_EnvsOnly bool = false
+const Default_RunCommandRequest_MaxStdout int32 = 1048576
+const Default_RunCommandRequest_MaxStderr int32 = 1048576
+const Default_RunCommandRequest_Timeout int32 = 60
+const Default_RunCommandRequest_MaxMemoryMb int32 = 32768
+
+func (m *RunCommandRequest) GetCommand() string {
+	if m != nil && m.Command != nil {
+		return *m.Command
+	}
+	return ""
+}
+
+func (m *RunCommandRequest) GetCwd() string {
+	if m != nil && m.Cwd != nil {
+		return *m.Cwd
+	}
+	return Default_RunCommandRequest_Cwd
+}
+
+func (m *RunCommandRequest) GetArgs() []string {
+	if m != nil {
+		return m.Args
+	}
+	return nil
+}
+
+func (m *RunCommandRequest) GetEnvs() []string {
+	if m != nil {
+		return m.Envs
+	}
+	return nil
+}
+
+func (m *RunCommandRequest) GetEnvsOnly() bool {
+	if m != nil && m.EnvsOnly != nil {
+		return *m.EnvsOnly
+	}
+	return Default_RunCommandRequest_EnvsOnly
+}
+
+func (m *RunCommandRequest) GetMaxStdout() int32 {
+	if m != nil && m.MaxStdout != nil {
+		return *m.MaxStdout
+	}
+	return Default_RunCommandRequest_MaxStdout
+}
+
+func (m *RunCommandRequest) GetMaxStderr() int32 {
+	if m != nil && m.MaxStderr != nil {
+		return *m.MaxStderr
+	}
+	return Default_RunCommandRequest_MaxStderr
+}
+
+func (m *RunCommandRequest) GetTimeout() int32 {
+	if m != nil && m.Timeout != nil {
+		return *m.Timeout
+	}
+	return Default_RunCommandRequest_Timeout
+}
+
+func (m *RunCommandRequest) GetMaxMemoryMb() int32 {
+	if m != nil && m.MaxMemoryMb != nil {
+		return *m.MaxMemoryMb
+	}
+	return Default_RunCommandRequest_MaxMemoryMb
+}
+
+func (m *RunCommandRequest) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type RunCommandResponse struct {
+	ErrorCode        *string         `protobuf:"bytes,1,req,name=error_code" json:"error_code,omitempty"`
+	Pid              *int32          `protobuf:"varint,2,opt,name=pid" json:"pid,omitempty"`
+	Status           *string         `protobuf:"bytes,3,opt,name=status" json:"status,omitempty"`
+	StdOutput        []byte          `protobuf:"bytes,4,opt,name=std_output" json:"std_output,omitempty"`
+	StdError         []byte          `protobuf:"bytes,5,opt,name=std_error" json:"std_error,omitempty"`
+	ExecutableFile   *string         `protobuf:"bytes,6,opt,name=executable_file" json:"executable_file,omitempty"`
+	StartTimeUs      *int64          `protobuf:"varint,16,opt,name=start_time_us" json:"start_time_us,omitempty"`
+	FinishTimeUs     *int64          `protobuf:"varint,17,opt,name=finish_time_us" json:"finish_time_us,omitempty"`
+	UserTime         *int64          `protobuf:"varint,18,opt,name=user_time" json:"user_time,omitempty"`
+	SystemTime       *int64          `protobuf:"varint,19,opt,name=system_time" json:"system_time,omitempty"`
+	MemoryMaxrssKb   *int64          `protobuf:"varint,20,opt,name=memory_maxrss_kb" json:"memory_maxrss_kb,omitempty"`
+	ExitStatus       *int32          `protobuf:"varint,30,opt,name=exit_status,def=0" json:"exit_status,omitempty"`
+	Signaled         *int32          `protobuf:"varint,31,opt,name=signaled,def=0" json:"signaled,omitempty"`
+	Coredump         *bool           `protobuf:"varint,32,opt,name=coredump,def=0" json:"coredump,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,40,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *RunCommandResponse) Reset()                    { *m = RunCommandResponse{} }
+func (m *RunCommandResponse) String() string            { return proto.CompactTextString(m) }
+func (*RunCommandResponse) ProtoMessage()               {}
+func (*RunCommandResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{28} }
+
+const Default_RunCommandResponse_ExitStatus int32 = 0
+const Default_RunCommandResponse_Signaled int32 = 0
+const Default_RunCommandResponse_Coredump bool = false
+
+func (m *RunCommandResponse) GetErrorCode() string {
+	if m != nil && m.ErrorCode != nil {
+		return *m.ErrorCode
+	}
+	return ""
+}
+
+func (m *RunCommandResponse) GetPid() int32 {
+	if m != nil && m.Pid != nil {
+		return *m.Pid
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetStatus() string {
+	if m != nil && m.Status != nil {
+		return *m.Status
+	}
+	return ""
+}
+
+func (m *RunCommandResponse) GetStdOutput() []byte {
+	if m != nil {
+		return m.StdOutput
+	}
+	return nil
+}
+
+func (m *RunCommandResponse) GetStdError() []byte {
+	if m != nil {
+		return m.StdError
+	}
+	return nil
+}
+
+func (m *RunCommandResponse) GetExecutableFile() string {
+	if m != nil && m.ExecutableFile != nil {
+		return *m.ExecutableFile
+	}
+	return ""
+}
+
+func (m *RunCommandResponse) GetStartTimeUs() int64 {
+	if m != nil && m.StartTimeUs != nil {
+		return *m.StartTimeUs
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetFinishTimeUs() int64 {
+	if m != nil && m.FinishTimeUs != nil {
+		return *m.FinishTimeUs
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetUserTime() int64 {
+	if m != nil && m.UserTime != nil {
+		return *m.UserTime
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetSystemTime() int64 {
+	if m != nil && m.SystemTime != nil {
+		return *m.SystemTime
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetMemoryMaxrssKb() int64 {
+	if m != nil && m.MemoryMaxrssKb != nil {
+		return *m.MemoryMaxrssKb
+	}
+	return 0
+}
+
+func (m *RunCommandResponse) GetExitStatus() int32 {
+	if m != nil && m.ExitStatus != nil {
+		return *m.ExitStatus
+	}
+	return Default_RunCommandResponse_ExitStatus
+}
+
+func (m *RunCommandResponse) GetSignaled() int32 {
+	if m != nil && m.Signaled != nil {
+		return *m.Signaled
+	}
+	return Default_RunCommandResponse_Signaled
+}
+
+func (m *RunCommandResponse) GetCoredump() bool {
+	if m != nil && m.Coredump != nil {
+		return *m.Coredump
+	}
+	return Default_RunCommandResponse_Coredump
+}
+
+func (m *RunCommandResponse) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
+
+type RunScriptRequest struct {
+	Script           []byte          `protobuf:"bytes,1,req,name=script" json:"script,omitempty"`
+	Cwd              *string         `protobuf:"bytes,2,opt,name=cwd,def=/tmp" json:"cwd,omitempty"`
+	Args             []string        `protobuf:"bytes,3,rep,name=args" json:"args,omitempty"`
+	Envs             []string        `protobuf:"bytes,4,rep,name=envs" json:"envs,omitempty"`
+	EnvsOnly         *bool           `protobuf:"varint,5,opt,name=envs_only,def=0" json:"envs_only,omitempty"`
+	MaxStdout        *int32          `protobuf:"varint,6,opt,name=max_stdout,def=1048576" json:"max_stdout,omitempty"`
+	MaxStderr        *int32          `protobuf:"varint,7,opt,name=max_stderr,def=1048576" json:"max_stderr,omitempty"`
+	Timeout          *int32          `protobuf:"varint,8,opt,name=timeout,def=60" json:"timeout,omitempty"`
+	MaxMemoryMb      *int32          `protobuf:"varint,9,opt,name=max_memory_mb,def=32768" json:"max_memory_mb,omitempty"`
+	Interpreter      *string         `protobuf:"bytes,10,opt,name=interpreter" json:"interpreter,omitempty"`
+	InterpreterArgs  []string        `protobuf:"bytes,11,rep,name=interpreter_args" json:"interpreter_args,omitempty"`
+	SlaveCommander   *SlaveCommander `protobuf:"bytes,12,req,name=slave_commander" json:"slave_commander,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *RunScriptRequest) Reset()                    { *m = RunScriptRequest{} }
+func (m *RunScriptRequest) String() string            { return proto.CompactTextString(m) }
+func (*RunScriptRequest) ProtoMessage()               {}
+func (*RunScriptRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{29} }
+
+const Default_RunScriptRequest_Cwd string = "/tmp"
+const Default_RunScriptRequest_EnvsOnly bool = false
+const Default_RunScriptRequest_MaxStdout int32 = 1048576
+const Default_RunScriptRequest_MaxStderr int32 = 1048576
+const Default_RunScriptRequest_Timeout int32 = 60
+const Default_RunScriptRequest_MaxMemoryMb int32 = 32768
+
+func (m *RunScriptRequest) GetScript() []byte {
+	if m != nil {
+		return m.Script
+	}
+	return nil
+}
+
+func (m *RunScriptRequest) GetCwd() string {
+	if m != nil && m.Cwd != nil {
+		return *m.Cwd
+	}
+	return Default_RunScriptRequest_Cwd
+}
+
+func (m *RunScriptRequest) GetArgs() []string {
+	if m != nil {
+		return m.Args
+	}
+	return nil
+}
+
+func (m *RunScriptRequest) GetEnvs() []string {
+	if m != nil {
+		return m.Envs
+	}
+	return nil
+}
+
+func (m *RunScriptRequest) GetEnvsOnly() bool {
+	if m != nil && m.EnvsOnly != nil {
+		return *m.EnvsOnly
+	}
+	return Default_RunScriptRequest_EnvsOnly
+}
+
+func (m *RunScriptRequest) GetMaxStdout() int32 {
+	if m != nil && m.MaxStdout != nil {
+		return *m.MaxStdout
+	}
+	return Default_RunScriptRequest_MaxStdout
+}
+
+func (m *RunScriptRequest) GetMaxStderr() int32 {
+	if m != nil && m.MaxStderr != nil {
+		return *m.MaxStderr
+	}
+	return Default_RunScriptRequest_MaxStderr
+}
+
+func (m *RunScriptRequest) GetTimeout() int32 {
+	if m != nil && m.Timeout != nil {
+		return *m.Timeout
+	}
+	return Default_RunScriptRequest_Timeout
+}
+
+func (m *RunScriptRequest) GetMaxMemoryMb() int32 {
+	if m != nil && m.MaxMemoryMb != nil {
+		return *m.MaxMemoryMb
+	}
+	return Default_RunScriptRequest_MaxMemoryMb
+}
+
+func (m *RunScriptRequest) GetInterpreter() string {
+	if m != nil && m.Interpreter != nil {
+		return *m.Interpreter
+	}
+	return ""
+}
+
+func (m *RunScriptRequest) GetInterpreterArgs() []string {
+	if m != nil {
+		return m.InterpreterArgs
+	}
+	return nil
+}
+
+func (m *RunScriptRequest) GetSlaveCommander() *SlaveCommander {
+	if m != nil {
+		return m.SlaveCommander
+	}
+	return nil
+}
 
 func init() {
 	proto.RegisterType((*ApplicationStatus)(nil), "masterslave.ApplicationStatus")
@@ -804,62 +1331,98 @@ func init() {
 	proto.RegisterType((*RemoveSlaveRequest)(nil), "masterslave.RemoveSlaveRequest")
 	proto.RegisterType((*AddCommanderRequest)(nil), "masterslave.AddCommanderRequest")
 	proto.RegisterType((*RemoveCommanderRequest)(nil), "masterslave.RemoveCommanderRequest")
+	proto.RegisterType((*GetHardwareRequest)(nil), "masterslave.GetHardwareRequest")
+	proto.RegisterType((*GetHardwareResponse)(nil), "masterslave.GetHardwareResponse")
+	proto.RegisterType((*GetFileContentRequest)(nil), "masterslave.GetFileContentRequest")
+	proto.RegisterType((*GetFileContentResponse)(nil), "masterslave.GetFileContentResponse")
+	proto.RegisterType((*GetFileChecksumRequest)(nil), "masterslave.GetFileChecksumRequest")
+	proto.RegisterType((*GetFileChecksumResponse)(nil), "masterslave.GetFileChecksumResponse")
+	proto.RegisterType((*RunCommandRequest)(nil), "masterslave.RunCommandRequest")
+	proto.RegisterType((*RunCommandResponse)(nil), "masterslave.RunCommandResponse")
+	proto.RegisterType((*RunScriptRequest)(nil), "masterslave.RunScriptRequest")
 	proto.RegisterEnum("masterslave.ApplicationState", ApplicationState_name, ApplicationState_value)
 }
 
-var fileDescriptor0 = []byte{
-	// 836 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xbc, 0x56, 0xdd, 0x6e, 0xeb, 0x44,
-	0x10, 0xc6, 0x4e, 0x9c, 0x26, 0xe3, 0xfc, 0x38, 0x3e, 0x4d, 0xba, 0x05, 0xce, 0xa1, 0x8a, 0x84,
-	0x54, 0x71, 0x51, 0xa1, 0x00, 0x87, 0xa3, 0x88, 0x9b, 0x03, 0xad, 0x10, 0x12, 0x2a, 0x52, 0x23,
-	0x6e, 0x10, 0xc8, 0xb8, 0xf1, 0x34, 0xb2, 0xe2, 0x3f, 0x76, 0xed, 0x34, 0xbd, 0x42, 0xf0, 0x58,
-	0xbc, 0x01, 0xb7, 0xf0, 0x42, 0xcc, 0xae, 0x9d, 0x90, 0x26, 0xee, 0x49, 0x55, 0xb5, 0xbd, 0x8b,
-	0x67, 0x66, 0x67, 0xbe, 0xef, 0x9b, 0xd9, 0xcd, 0x40, 0x37, 0x74, 0x45, 0x8a, 0x5c, 0x04, 0xee,
-	0x1c, 0x4f, 0x12, 0x1e, 0xa7, 0xb1, 0x6d, 0xae, 0x99, 0x06, 0xff, 0xea, 0xd0, 0x7d, 0x9b, 0x24,
-	0x81, 0x3f, 0x71, 0x53, 0x3f, 0x8e, 0xc6, 0xa9, 0x9b, 0x66, 0xc2, 0x7e, 0x0d, 0x86, 0xa0, 0x5f,
-	0xc8, 0xb4, 0x23, 0xfd, 0xb8, 0x3d, 0x7c, 0x79, 0xb2, 0x9e, 0x65, 0x23, 0x1c, 0x47, 0xf5, 0xd9,
-	0x8f, 0xd1, 0x2c, 0x8a, 0xaf, 0x23, 0xbb, 0x09, 0xd5, 0xc8, 0x0d, 0x91, 0xe9, 0x74, 0xac, 0x61,
-	0x9b, 0x50, 0x49, 0x7c, 0x8f, 0x55, 0x8e, 0xb4, 0x63, 0xc3, 0x3e, 0x80, 0x0e, 0x2e, 0x70, 0x92,
-	0xa5, 0xee, 0x65, 0x80, 0xce, 0x95, 0x1f, 0x20, 0xab, 0x92, 0x43, 0x45, 0x4d, 0xae, 0x3d, 0x66,
-	0xa8, 0x8f, 0x0e, 0xec, 0x85, 0x28, 0x84, 0x3b, 0x45, 0x56, 0x53, 0x06, 0x1b, 0x40, 0x55, 0x75,
-	0x54, 0xde, 0xba, 0xb2, 0xf5, 0xa0, 0x45, 0xe8, 0x78, 0xea, 0xa4, 0x7e, 0x88, 0x4e, 0x26, 0x18,
-	0x90, 0xb9, 0x62, 0x1f, 0x42, 0x37, 0x20, 0x98, 0x8e, 0x48, 0xe3, 0x64, 0xe5, 0x32, 0x95, 0xab,
-	0x0b, 0x0d, 0xe2, 0x3e, 0x71, 0x24, 0x29, 0xd6, 0x54, 0x49, 0x5e, 0x80, 0xb9, 0x32, 0x51, 0x5c,
-	0x4b, 0x19, 0x19, 0x58, 0x2a, 0x05, 0x2e, 0xfc, 0x74, 0xe9, 0x79, 0xa5, 0xe0, 0x53, 0xcd, 0x3c,
-	0xb9, 0x3f, 0x8d, 0xdc, 0x00, 0x3d, 0xf6, 0xd1, 0x2d, 0xf3, 0x24, 0xe6, 0xe8, 0x65, 0x61, 0xc2,
-	0x8e, 0xc8, 0x5c, 0x1f, 0x7c, 0x05, 0xed, 0xb1, 0x44, 0xfd, 0x4d, 0x1c, 0x86, 0x6e, 0xe4, 0x21,
-	0xdf, 0xe0, 0xa1, 0x29, 0x7d, 0xfa, 0xd0, 0x9e, 0x2c, 0x03, 0x9c, 0x42, 0x37, 0x42, 0x31, 0xf8,
-	0x47, 0x87, 0xde, 0x5b, 0xcf, 0x5b, 0xd3, 0xf9, 0x02, 0x7f, 0xcb, 0x50, 0xa4, 0x2b, 0x7d, 0xf3,
-	0xf3, 0x6d, 0xa8, 0x5d, 0xfa, 0x91, 0xcb, 0x6f, 0xf2, 0x73, 0xd2, 0xeb, 0xf2, 0xa9, 0x20, 0xc1,
-	0x2b, 0xf9, 0x17, 0x46, 0x73, 0x41, 0x2a, 0x57, 0x14, 0xb3, 0x86, 0xfc, 0x72, 0xe2, 0x28, 0xb8,
-	0x51, 0x5a, 0xd7, 0x47, 0xc6, 0x95, 0x1b, 0x08, 0xb4, 0x5f, 0x42, 0x87, 0xb0, 0xfb, 0x1c, 0x27,
-	0x92, 0xb2, 0x17, 0x67, 0xa9, 0x92, 0xbe, 0x3e, 0xaa, 0xa6, 0x3c, 0xdb, 0x72, 0x23, 0xe7, 0x6c,
-	0x6f, 0xcd, 0xfd, 0x39, 0x74, 0x72, 0x5e, 0x2b, 0x26, 0xd4, 0x24, 0xfd, 0xd8, 0x1c, 0x7e, 0x70,
-	0x6b, 0x66, 0x36, 0xd4, 0xf8, 0x10, 0x5a, 0xa1, 0xbb, 0x70, 0x42, 0x0c, 0x63, 0x7e, 0xe3, 0x84,
-	0x97, 0xac, 0x21, 0xd5, 0x1c, 0x19, 0x9f, 0x0d, 0xbf, 0x7c, 0xfd, 0x46, 0x0e, 0x81, 0xcc, 0x86,
-	0x51, 0xaa, 0x3a, 0xdb, 0xb0, 0xf7, 0xa1, 0x19, 0x7a, 0x5f, 0x88, 0x2c, 0x54, 0x73, 0x23, 0xd8,
-	0x7e, 0x41, 0xc9, 0xc2, 0x45, 0x42, 0xb8, 0xd0, 0x73, 0x72, 0xb7, 0x60, 0x3d, 0xe5, 0x21, 0xb1,
-	0x8b, 0x78, 0x9a, 0x4a, 0xd6, 0x57, 0x2d, 0xf9, 0x5b, 0x83, 0xfe, 0xa6, 0xa8, 0x22, 0x89, 0x23,
-	0x52, 0xe0, 0x04, 0x6a, 0x45, 0xaf, 0x35, 0x0a, 0x35, 0x87, 0xaf, 0xde, 0x35, 0xee, 0x74, 0x3b,
-	0xde, 0x40, 0x33, 0xe1, 0x38, 0x77, 0x78, 0xde, 0x15, 0xa5, 0xbe, 0x39, 0x1c, 0xdc, 0x3e, 0x55,
-	0xda, 0x3f, 0x39, 0xde, 0x05, 0xd2, 0xbc, 0x49, 0x25, 0xf2, 0x55, 0x77, 0xca, 0x37, 0x70, 0x80,
-	0x8d, 0xe5, 0x05, 0x58, 0xab, 0x20, 0x96, 0x25, 0x5a, 0x60, 0xc8, 0x11, 0x91, 0x5c, 0xee, 0x28,
-	0xa0, 0xef, 0x2e, 0xf0, 0x87, 0x06, 0x87, 0x25, 0x15, 0x4a, 0xf4, 0xaa, 0xdc, 0x43, 0xaf, 0x87,
-	0x61, 0xf8, 0x19, 0xfa, 0x63, 0xba, 0xc9, 0x3b, 0x6f, 0xc1, 0xc3, 0xb2, 0xff, 0x0e, 0x07, 0x5b,
-	0xd9, 0x4b, 0xe8, 0xe9, 0x4f, 0x46, 0xcf, 0x81, 0x43, 0xaa, 0xb8, 0xa1, 0xf1, 0x63, 0x32, 0xfc,
-	0x53, 0x83, 0xf7, 0xcb, 0x2a, 0x3c, 0x2b, 0xcb, 0x5f, 0xa0, 0xff, 0x2d, 0x3e, 0xdd, 0x9c, 0x52,
-	0x17, 0xb7, 0xd2, 0x3f, 0xeb, 0x90, 0xfe, 0x00, 0x07, 0xdf, 0xfb, 0xa2, 0x94, 0xe0, 0x43, 0xc7,
-	0x82, 0x6d, 0x27, 0x2c, 0x28, 0x3d, 0x8a, 0x64, 0xbf, 0xca, 0xb9, 0x0b, 0xe3, 0x39, 0x3e, 0x59,
-	0x53, 0x2e, 0xe4, 0xdc, 0x6d, 0x57, 0x28, 0x48, 0x94, 0xe4, 0xd4, 0x76, 0xe7, 0xfc, 0x8b, 0x5e,
-	0xef, 0x53, 0x74, 0xef, 0x78, 0x53, 0xdd, 0x24, 0x39, 0xff, 0xff, 0xba, 0x14, 0x7f, 0xf6, 0xb4,
-	0x46, 0x7c, 0x77, 0xaa, 0xf0, 0x1a, 0xf2, 0x0f, 0xa4, 0x30, 0xa9, 0x8d, 0x85, 0x1e, 0x5f, 0x19,
-	0xf8, 0xa9, 0x0c, 0xc4, 0x79, 0x6e, 0xaa, 0xde, 0x63, 0xd3, 0x29, 0x03, 0x6f, 0xec, 0x06, 0xff,
-	0x31, 0x74, 0xe8, 0xef, 0x40, 0x19, 0x97, 0xa0, 0x4b, 0xd6, 0x81, 0xc1, 0x3e, 0xd8, 0xb9, 0x6e,
-	0xeb, 0x91, 0x83, 0x1e, 0xbc, 0xa0, 0xc3, 0xab, 0x64, 0x4b, 0x33, 0x83, 0x7e, 0x1e, 0xbc, 0xe9,
-	0xf9, 0x24, 0x05, 0x6b, 0x0b, 0x77, 0x13, 0x56, 0x3b, 0x9a, 0xf5, 0x1e, 0x6d, 0x5c, 0x7b, 0xb3,
-	0x73, 0xbc, 0xa6, 0x28, 0x4b, 0x53, 0xae, 0x8b, 0x2c, 0x8a, 0xfc, 0x68, 0x6a, 0xe9, 0x34, 0x00,
-	0x8d, 0x99, 0x7c, 0x17, 0x13, 0xf9, 0x59, 0x21, 0x6d, 0xcd, 0x59, 0xf1, 0x86, 0x48, 0x43, 0x55,
-	0x1d, 0x3d, 0xa3, 0xe5, 0x08, 0x3d, 0xcb, 0x20, 0x0e, 0xb5, 0xd9, 0x19, 0xe7, 0x31, 0xb7, 0x6a,
-	0x5f, 0xb7, 0x7e, 0x5a, 0x5f, 0x2b, 0xff, 0x0b, 0x00, 0x00, 0xff, 0xff, 0x68, 0xa0, 0x39, 0x85,
-	0x77, 0x0a, 0x00, 0x00,
+var fileDescriptor1 = []byte{
+	// 1270 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xd4, 0x58, 0x5b, 0x6f, 0xe3, 0x44,
+	0x14, 0xc6, 0x76, 0x9c, 0x26, 0x27, 0x69, 0xeb, 0x3a, 0x6d, 0xea, 0xb2, 0xec, 0x52, 0x45, 0x42,
+	0xaa, 0x78, 0x28, 0xa5, 0xec, 0x76, 0xab, 0x88, 0x97, 0x65, 0x77, 0xb9, 0x48, 0x68, 0x91, 0x5a,
+	0xf1, 0x82, 0x40, 0xc6, 0xb5, 0x27, 0xad, 0x95, 0xf8, 0x82, 0xc7, 0xee, 0x05, 0x1e, 0x10, 0xbc,
+	0xf1, 0xc6, 0x4f, 0xe1, 0x19, 0x89, 0x1f, 0xc0, 0x2b, 0xfc, 0x13, 0x7e, 0x01, 0x67, 0x8e, 0x2f,
+	0x71, 0x12, 0xb7, 0xa9, 0xb2, 0xdb, 0x95, 0xf6, 0x2d, 0x3e, 0x33, 0x73, 0x2e, 0xdf, 0x7c, 0x33,
+	0xf3, 0x9d, 0xc0, 0x9a, 0x67, 0xf1, 0x98, 0x45, 0x7c, 0x64, 0x9d, 0xb3, 0xdd, 0x30, 0x0a, 0xe2,
+	0x40, 0x6f, 0x95, 0x4c, 0xbd, 0x7f, 0x65, 0x58, 0x7b, 0x12, 0x86, 0x23, 0xd7, 0xb6, 0x62, 0x37,
+	0xf0, 0x8f, 0x63, 0x2b, 0x4e, 0xb8, 0x7e, 0x00, 0x2a, 0xc7, 0x5f, 0xcc, 0x90, 0xb6, 0xe5, 0x9d,
+	0x95, 0xfd, 0xfb, 0xbb, 0x65, 0x2f, 0x53, 0xd3, 0x59, 0xbf, 0x31, 0xfc, 0xda, 0x1f, 0xfa, 0xc1,
+	0x85, 0xaf, 0xb7, 0xa1, 0xe6, 0x5b, 0x1e, 0x33, 0x64, 0x5c, 0xd6, 0xd4, 0x5b, 0xa0, 0x84, 0xae,
+	0x63, 0x28, 0xdb, 0xd2, 0x8e, 0xaa, 0x6f, 0xc2, 0x2a, 0xbb, 0x64, 0x76, 0x12, 0x5b, 0x27, 0x23,
+	0x66, 0x0e, 0xdc, 0x11, 0x33, 0x6a, 0x38, 0x40, 0xb3, 0xec, 0x0b, 0xc7, 0x50, 0xe9, 0x63, 0x15,
+	0x96, 0x3c, 0xc6, 0xb9, 0x75, 0xca, 0x8c, 0x3a, 0x19, 0x74, 0x00, 0x8a, 0x6a, 0x92, 0xdf, 0x06,
+	0xd9, 0x36, 0x60, 0x19, 0xb3, 0x8b, 0x62, 0x33, 0x76, 0x3d, 0x66, 0x26, 0xdc, 0x00, 0x34, 0x2b,
+	0xfa, 0x16, 0xac, 0x8d, 0x30, 0x4d, 0x93, 0xc7, 0x41, 0x58, 0x0c, 0xb5, 0x68, 0x68, 0x0d, 0x9a,
+	0x58, 0xbb, 0x6d, 0x8a, 0xa2, 0x8c, 0x36, 0x39, 0xe9, 0x40, 0xab, 0x30, 0xe1, 0xbc, 0x65, 0x32,
+	0x1a, 0xa0, 0x91, 0x0b, 0x76, 0xe9, 0xc6, 0xf9, 0xc8, 0x03, 0x4a, 0x1f, 0x63, 0xa6, 0xce, 0xdd,
+	0x53, 0xdf, 0x1a, 0x31, 0xc7, 0x78, 0x77, 0xc2, 0x6c, 0x07, 0x11, 0x73, 0x12, 0x2f, 0x34, 0xb6,
+	0xd1, 0xdc, 0xe8, 0x7d, 0x0c, 0x2b, 0xc7, 0x22, 0xeb, 0xa7, 0x81, 0xe7, 0x59, 0xbe, 0xc3, 0xa2,
+	0xa9, 0x3a, 0x24, 0xc2, 0xa7, 0x0b, 0x2b, 0x76, 0x3e, 0xc1, 0xcc, 0x70, 0xc3, 0x2c, 0x7a, 0xff,
+	0xc8, 0xb0, 0xf1, 0xc4, 0x71, 0x4a, 0x38, 0x1f, 0xb1, 0x1f, 0x12, 0xc6, 0xe3, 0x02, 0xdf, 0x74,
+	0xfd, 0x0a, 0xd4, 0x4f, 0x5c, 0xdf, 0x8a, 0xae, 0xd2, 0x75, 0x62, 0xd4, 0x8a, 0x4e, 0x39, 0x02,
+	0xae, 0xa4, 0x5f, 0xcc, 0x3f, 0xe7, 0x88, 0xb2, 0x42, 0x95, 0x35, 0xc5, 0x97, 0x19, 0xf8, 0xa3,
+	0x2b, 0xc2, 0xba, 0xd1, 0x57, 0x07, 0xd6, 0x88, 0x33, 0xfd, 0x3e, 0xac, 0x62, 0xee, 0x6e, 0xc4,
+	0x6c, 0x51, 0xb2, 0x13, 0x24, 0x31, 0x41, 0xdf, 0xe8, 0xd7, 0xe2, 0x28, 0x99, 0x19, 0x66, 0x51,
+	0x64, 0x2c, 0x95, 0x86, 0x1f, 0xc2, 0x6a, 0x5a, 0x57, 0x51, 0x09, 0x6e, 0x92, 0xbc, 0xd3, 0xda,
+	0xbf, 0x37, 0xc1, 0x99, 0x29, 0x34, 0xde, 0x81, 0x65, 0xcf, 0xba, 0x34, 0x3d, 0xe6, 0x05, 0xd1,
+	0x95, 0xe9, 0x9d, 0x18, 0x4d, 0x81, 0x66, 0x5f, 0xfd, 0x68, 0xff, 0xf1, 0xc1, 0xa1, 0x20, 0x81,
+	0xf0, 0xc6, 0xfc, 0x98, 0x76, 0xb6, 0xa9, 0xaf, 0x43, 0xdb, 0x73, 0x1e, 0xf1, 0xc4, 0x23, 0xde,
+	0x70, 0x63, 0x3d, 0x2b, 0x49, 0x63, 0x97, 0x21, 0xe6, 0xc5, 0x1c, 0x33, 0x1d, 0xe6, 0xc6, 0x06,
+	0x8d, 0x20, 0xd8, 0xd9, 0x7c, 0x64, 0xa5, 0xd1, 0xa5, 0x2d, 0xf9, 0x5b, 0x82, 0xee, 0x34, 0xa8,
+	0x3c, 0x0c, 0x7c, 0x44, 0x60, 0x17, 0xea, 0xd9, 0x5e, 0x4b, 0x38, 0xb5, 0xb5, 0xff, 0xe0, 0x26,
+	0xba, 0xe3, 0xe9, 0x38, 0x84, 0x76, 0x18, 0xb1, 0x73, 0x33, 0x4a, 0x77, 0x85, 0xd0, 0x6f, 0xed,
+	0xf7, 0x26, 0x57, 0x55, 0xee, 0x9f, 0xa0, 0x77, 0x96, 0x69, 0xba, 0x49, 0x15, 0xf0, 0xd5, 0xe6,
+	0xc2, 0xd7, 0x33, 0xc1, 0x38, 0x16, 0x07, 0xa0, 0x14, 0x81, 0xe7, 0x21, 0x96, 0x41, 0x15, 0x14,
+	0x11, 0xb5, 0x5c, 0x13, 0x40, 0x9e, 0x1f, 0xe0, 0x17, 0x09, 0xb6, 0x2a, 0x22, 0x54, 0xe0, 0xa5,
+	0xdc, 0x02, 0xaf, 0xc5, 0x72, 0xf8, 0x16, 0xba, 0xc7, 0x78, 0x92, 0xe7, 0x9e, 0x82, 0xc5, 0xbc,
+	0xff, 0x0c, 0x9b, 0x33, 0xde, 0x2b, 0xca, 0x93, 0xef, 0xac, 0x3c, 0x13, 0xb6, 0x30, 0xe2, 0x14,
+	0xc6, 0xaf, 0xb2, 0xc2, 0x5f, 0x25, 0x78, 0xbb, 0x2a, 0xc2, 0x6b, 0xad, 0xf2, 0x3b, 0xe8, 0x7e,
+	0xc6, 0xee, 0x8e, 0xa7, 0xb8, 0x8b, 0x33, 0xee, 0x5f, 0x2b, 0x49, 0xbf, 0x82, 0xcd, 0x2f, 0x5d,
+	0x5e, 0x59, 0xe0, 0xa2, 0xb4, 0x30, 0x66, 0x1d, 0x66, 0x25, 0xbd, 0x12, 0xc8, 0xbe, 0x17, 0xbc,
+	0xf3, 0x82, 0x73, 0x76, 0x67, 0x9b, 0x72, 0x24, 0x78, 0x37, 0x1b, 0x21, 0x2b, 0xa2, 0xc2, 0xa7,
+	0x34, 0xdf, 0xe7, 0x9f, 0x78, 0x7b, 0x3f, 0x63, 0xd6, 0x35, 0x77, 0xaa, 0x15, 0x86, 0x2f, 0xc6,
+	0xc7, 0x25, 0x7b, 0xec, 0x51, 0x46, 0x7c, 0xf1, 0x8c, 0xf2, 0x55, 0xc5, 0x03, 0x92, 0x99, 0x48,
+	0xb1, 0xe0, 0xe5, 0x2b, 0x26, 0xee, 0x89, 0x89, 0xec, 0x3c, 0x35, 0xd5, 0x6e, 0xa1, 0x74, 0xaa,
+	0x92, 0x57, 0xe7, 0x27, 0xff, 0x1e, 0xac, 0xe2, 0x73, 0x40, 0xc6, 0x3c, 0xe9, 0x0a, 0x39, 0xd0,
+	0x5b, 0x07, 0x3d, 0xc5, 0xad, 0x3c, 0xb3, 0xb7, 0x01, 0x1d, 0x5c, 0x5c, 0x38, 0xcb, 0xcd, 0x06,
+	0x74, 0xd3, 0xc9, 0x33, 0x23, 0x26, 0xe8, 0x78, 0x26, 0x3e, 0xb7, 0x22, 0xe7, 0xc2, 0x8a, 0x8a,
+	0x80, 0x1d, 0xa8, 0x8d, 0xf8, 0xd9, 0x05, 0xbd, 0x70, 0xc5, 0xd3, 0xbf, 0xd8, 0xfe, 0xfe, 0x26,
+	0x41, 0x67, 0x22, 0xc2, 0x98, 0x9e, 0x23, 0x1e, 0xda, 0x2e, 0xc5, 0x68, 0xa6, 0x9f, 0x76, 0x98,
+	0x8c, 0xc5, 0x09, 0x25, 0xa0, 0xd0, 0x97, 0x06, 0x0d, 0x77, 0x60, 0x07, 0xfe, 0xc0, 0x3d, 0xcd,
+	0x64, 0xe0, 0x62, 0xd0, 0xfe, 0x04, 0x1b, 0x98, 0xca, 0xa7, 0xa8, 0x0a, 0x9e, 0x06, 0x7e, 0x8c,
+	0x8a, 0x21, 0xaf, 0x17, 0x49, 0x20, 0xb4, 0x42, 0x59, 0x6e, 0x6d, 0x41, 0x43, 0x88, 0x0e, 0xee,
+	0xfe, 0x98, 0x0a, 0x2d, 0xa5, 0xbf, 0xf4, 0xe1, 0xde, 0xc3, 0xc3, 0x47, 0x8f, 0x0f, 0x16, 0x7c,
+	0x86, 0xff, 0x90, 0xe8, 0x76, 0x9b, 0x88, 0x9e, 0x61, 0x81, 0xfb, 0x8b, 0x4a, 0x29, 0x88, 0xd0,
+	0xa1, 0x93, 0xc7, 0x27, 0x59, 0x43, 0xd3, 0x28, 0x7c, 0xbb, 0xc8, 0x91, 0x32, 0x52, 0x48, 0xa8,
+	0xa2, 0x2a, 0xf5, 0x02, 0xc7, 0x1d, 0x5c, 0x91, 0x80, 0x25, 0x68, 0xc8, 0x68, 0x47, 0x0c, 0xf9,
+	0x97, 0x1a, 0x55, 0x32, 0x56, 0xa4, 0x5c, 0xbf, 0xed, 0x7d, 0x4c, 0x19, 0x9f, 0x31, 0x7b, 0x88,
+	0x4a, 0xa4, 0x74, 0xf4, 0x53, 0x71, 0xf5, 0x72, 0x97, 0xcb, 0xe6, 0x8c, 0xfb, 0x0c, 0x91, 0x92,
+	0xf4, 0x79, 0x99, 0x08, 0xbf, 0x63, 0xbf, 0x72, 0x94, 0xf8, 0x99, 0xa1, 0x74, 0x07, 0x64, 0x5e,
+	0x8a, 0x3b, 0x80, 0x9a, 0x0a, 0xa2, 0x5e, 0xbf, 0xf6, 0x41, 0xec, 0x85, 0x0b, 0xaa, 0xe3, 0x7b,
+	0x28, 0x25, 0x05, 0x69, 0xc6, 0xc2, 0x58, 0x1d, 0xd3, 0x66, 0x3c, 0x98, 0xcb, 0xe2, 0xd2, 0x60,
+	0x07, 0x96, 0xc4, 0x76, 0x89, 0x65, 0x0d, 0x1a, 0x91, 0x0f, 0xf6, 0xe6, 0x08, 0xdf, 0x0a, 0x48,
+	0x60, 0x3e, 0x24, 0xff, 0xc9, 0x78, 0x71, 0x94, 0x20, 0xb9, 0x81, 0x82, 0x59, 0x47, 0x26, 0x53,
+	0xef, 0xb2, 0x52, 0xbc, 0x90, 0x4a, 0xd1, 0x6a, 0xc5, 0x8e, 0x89, 0x09, 0x87, 0x98, 0x73, 0x2d,
+	0xa7, 0xa8, 0xb0, 0x91, 0x23, 0x02, 0xa6, 0x5d, 0xd5, 0xc8, 0xd5, 0xab, 0xdb, 0x32, 0x8d, 0x88,
+	0x8a, 0x5d, 0xce, 0xc0, 0xf5, 0x5d, 0x7e, 0x56, 0xd8, 0xd7, 0xf2, 0x9e, 0x2c, 0xe1, 0xd8, 0xf8,
+	0x10, 0xa7, 0xf5, 0x9c, 0xe8, 0xfc, 0x0a, 0xeb, 0xf4, 0x52, 0x63, 0x87, 0x8c, 0x28, 0xf3, 0x73,
+	0xb8, 0xac, 0xcb, 0x88, 0x73, 0x73, 0x78, 0x82, 0x0d, 0x40, 0xea, 0xb9, 0x35, 0xd3, 0xa8, 0xf5,
+	0xa5, 0x3d, 0x74, 0xd3, 0x98, 0x6c, 0xd3, 0x84, 0x71, 0x13, 0x1a, 0x93, 0x4d, 0xda, 0x0d, 0x97,
+	0xe0, 0xce, 0x7c, 0xd0, 0xff, 0x92, 0x41, 0x43, 0xd0, 0x8f, 0xed, 0xc8, 0x0d, 0x8b, 0x4b, 0x47,
+	0x20, 0x4a, 0x06, 0x82, 0xbb, 0xfd, 0x86, 0xb2, 0x10, 0x77, 0xc1, 0xc5, 0x6b, 0x2a, 0xc2, 0xb7,
+	0x31, 0x26, 0x06, 0x66, 0x9d, 0x71, 0xc9, 0x68, 0x52, 0x0d, 0xad, 0xeb, 0xce, 0x71, 0x7b, 0x2e,
+	0x7e, 0xef, 0xc7, 0xa0, 0xcd, 0xbc, 0xae, 0x6d, 0x28, 0xfe, 0x49, 0xd0, 0xde, 0x42, 0xae, 0x2e,
+	0x0d, 0x5f, 0xb0, 0x0b, 0x9c, 0xa5, 0x49, 0x34, 0x84, 0x70, 0xfb, 0xae, 0x7f, 0xaa, 0xc9, 0x78,
+	0x57, 0x35, 0x87, 0x42, 0xbd, 0x87, 0xe2, 0x53, 0xc1, 0xd3, 0xdf, 0x1a, 0x66, 0x4a, 0x57, 0x18,
+	0x6a, 0xb4, 0xf4, 0x39, 0x32, 0x83, 0x39, 0x9a, 0x8a, 0xac, 0xae, 0x0f, 0x9f, 0x0b, 0xfe, 0x6a,
+	0xf5, 0x4f, 0x96, 0xbf, 0x29, 0xff, 0xf9, 0xf1, 0x7f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xfb, 0xcb,
+	0x38, 0xb1, 0x1d, 0x11, 0x00, 0x00,
 }

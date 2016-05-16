@@ -2,6 +2,7 @@ package masterslave
 
 import (
 	"github.com/williammuji/shiran/shiran"
+	"github.com/golang/glog"
 )
 
 type MasterService struct {
@@ -116,6 +117,53 @@ func (service *MasterService) HandleListApplicationsRequest(msg *ListApplication
 	service.slaveManager.PostEvent(event)
 }
 
+func (service *MasterService) HandleGetHardwareRequest(msg *GetHardwareRequest, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETHARDWARE,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleGetFileContentRequest(msg *GetFileContentRequest, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETFILECONTENT,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleGetFileChecksumRequest(msg *GetFileChecksumRequest, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETFILECHECKSUM,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleRunCommandRequest(msg *RunCommandRequest, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		RUNCOMMAND,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleRunScriptRequest(msg *RunScriptRequest, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		RUNSCRIPT,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+
+
 func (service *MasterService) HandleAddApplicationResponse(msg *AddApplicationResponse, session *shiran.Session) {
 	event := SlaveEvent{
 		eventType:		ADDAPPRESPONSE,
@@ -177,4 +225,45 @@ func (service *MasterService) HandleRemoveApplicationsResponse(msg *RemoveApplic
 		session:		session,
 	}
 	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleGetHardwareResponse(msg *GetHardwareResponse, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETHARDWARERESPONSE,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleGetFileContentResponse(msg *GetFileContentResponse, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETFILECONTENTRESPONSE,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleGetFileChecksumResponse(msg *GetFileChecksumResponse, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		GETFILECHECKSUMRESPONSE,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+func (service *MasterService) HandleRunCommandResponse(msg *RunCommandResponse, session *shiran.Session) {
+	event := SlaveEvent{
+		eventType:		RUNCOMMANDRESPONSE,
+		msg:			msg,
+		session:		session,
+	}
+	service.slaveManager.PostEvent(event)
+}
+
+
+func (service *MasterService) HandleSlaveHeartbeat(msg *SlaveHeartbeat, session *shiran.Session) {
+	glog.Infof("session.Name:%s Heartbeat: %+v", session.Name, msg)
 }

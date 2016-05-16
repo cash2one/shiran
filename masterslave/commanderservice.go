@@ -50,3 +50,23 @@ func (service *CommanderService) HandleGetApplicationsResponse(msg *GetApplicati
 	glog.Infof("CommanderService HandleGetApplicationsResponse %v", msg)
 	service.commander.close()
 }
+
+func (service *CommanderService) HandleGetHardwareResponse(msg *GetHardwareResponse, session *shiran.Session) {
+	glog.Infof("CommanderService HandleGetHardwareResponse %v", msg)
+	service.commander.close()
+}
+
+func (service *CommanderService) HandleGetFileContentResponse(msg *GetFileContentResponse, session *shiran.Session) {
+	glog.Infof("CommanderService HandleGetFileContentResponse %v", msg)
+	service.commander.close()
+}
+
+func (service *CommanderService) HandleGetFileChecksumResponse(msg *GetFileChecksumResponse, session *shiran.Session) {
+	glog.Infof("CommanderService HandleGetFileChecksumResponse %v", sg)
+	service.commander.close()
+}
+
+func (service *CommanderService) HandleRunCommandResponse(msg *RunCommandResponse, session *shiran.Session) {
+	glog.Infof("CommanderService HandleRunCommandResponse %v", msg)
+	service.commander.close()
+}
